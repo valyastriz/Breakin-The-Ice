@@ -9,6 +9,6 @@ const lawSchema = new Schema(
  
 });
 
-const Law = model('Law', lawSchema);
 
-module.exports = Law;
+
+module.exports = lawSchema;

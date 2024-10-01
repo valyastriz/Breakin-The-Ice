@@ -8,6 +8,6 @@ const wouldYouRatherSchema = new Schema(
  
 });
 
-const WouldYouRather = model('WouldYouRather', wouldYouRatherSchema);
 
-module.exports = WouldYouRather;
+
+module.exports = wouldYouRatherSchema;
