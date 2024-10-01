@@ -1,5 +1,6 @@
 const { Schema, model } = require('mongoose');
 const bcrypt = require('bcrypt');
+const { ObjectId } = Schema.Types;
 
 
 const favoriteSchema = require('./Favorite');
@@ -22,7 +23,7 @@ const userSchema = new Schema(
       required: true,
     },
     
-    savedFavorites: [favoriteSchema],
+    savedFavorites: [{ type: ObjectId, ref: 'Favorite' }],
   },
   // set this to use virtual below
   {
@@ -54,4 +55,4 @@ userSchema.virtual('favoriteCount').get(function () {
 
 const User = model('User', userSchema);
 
-module.exports = User;
+module.exports = User, userSchema;
