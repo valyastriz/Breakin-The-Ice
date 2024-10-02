@@ -9,6 +9,7 @@ import Results from './pages/Results';
 import Contact from './pages/Contact';
 import About from './pages/About';
 import BuyUsACoffee from './pages/BuyUsACoffee';
+import Favorites from './pages/Favorites';
 import { Box } from '@mui/material';
 import { useState } from 'react';
 
@@ -34,6 +35,7 @@ function App() {
                 <Route path="/contact" element={<Contact />} />
                 <Route path="/about" element={<About />} />
                 <Route path="/buyusacoffee" element={<BuyUsACoffee />} />
+                <Route path="/favorites" element={<Favorites />} />
               </Routes>
             </Box>
           </Box>
