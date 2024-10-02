@@ -6,4 +6,6 @@ const Favorite = require('./Favorite');
 
 const WouldYouRather = require('./WouldYouRather');
 
-module.exports = { User, Law, Favorite, WouldYouRather };
+const IceBreaker = require('./IceBreaker');
+
+module.exports = { User, Law, Favorite, WouldYouRather, IceBreaker };
