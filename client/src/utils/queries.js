@@ -95,3 +95,13 @@ export const GET_RANDOM_WOULD_YOU_RATHERS = gql`
         }
     }
 `;
+
+export const GET_RANDOM_ICEBREAKERS = gql`
+  query getRandomIceBreakers($limit: Int!) {
+    getRandomIceBreakers(limit: $limit) {
+      _id
+      content
+      __typename
+    }
+  }
+`;
