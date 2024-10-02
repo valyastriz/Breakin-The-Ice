@@ -17,7 +17,7 @@ const Header = ({setNavOpen, navOpen}) => {
         <Box sx={{
             display: 'flex', 
             flexGrow: 1, 
-            minHeight: '60px', 
+            minHeight: '80px', 
             backgroundColor: theme.background.accent,
             alignItems: 'center',
             justifyContent: 'space-between'  // Adjusts content to each end

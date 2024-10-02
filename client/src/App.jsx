@@ -3,7 +3,7 @@ import Header from './components/Header';
 import Footer from './components/Footer';
 import Navbar from './components/Navbar';
 import Home from './pages/Home';
-import { Box,Typography,Input, Stack } from '@mui/material'
+import { Box } from '@mui/material'
 import {useState} from 'react';
 
 const client = new ApolloClient({
