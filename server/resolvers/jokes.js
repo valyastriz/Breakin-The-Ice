@@ -4,7 +4,12 @@ const resolvers = {
   Query: {
     async getJokes() {
       const jokesResponse = await axios.get('https://official-joke-api.appspot.com/jokes/random/10');
-      return jokesResponse.data;  // Return the array of jokes directly
+      // Map the jokes to combine setup and punchline into a single 'content' field
+      return jokesResponse.data.map(joke => ({
+        id: joke.id,
+        content: `${joke.setup} ${joke.punchline}`, // Combine setup and punchline into 'content'
+        __typename: 'Joke'
+      }));
     }
   }
 };

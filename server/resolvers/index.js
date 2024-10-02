@@ -1,6 +1,7 @@
 const lawResolvers = require('./law');
 const favoritesResolvers = require('./favorites');
 const wouldYouRatherResolvers = require('./wouldYouRather');
+const iceBreakerResolvers = require('./iceBreaker');
 const userResolvers = require('./user');
 const jokesResolvers = require('./jokes');
 const factsResolvers = require('./facts');
@@ -11,6 +12,7 @@ const resolvers = {
     ...favoritesResolvers.Query,
     ...lawResolvers.Query,
     ...wouldYouRatherResolvers.Query,
+    ...iceBreakerResolvers.Query,
     ...userResolvers.Query,
     ...jokesResolvers.Query,
     ...factsResolvers.Query,

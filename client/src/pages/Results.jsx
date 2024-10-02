@@ -3,15 +3,15 @@ import { Box,Typography, Input } from '@mui/material'
 import IceBreakerResults from '../components/IceBreakerResults';
 import { useIcebreaker} from '../Context/IcebreakerContext';
 // import { GET_ICEBREAKER_QUESTIONS, GET_JOKES, GET_LAWS, GET_WOULD_YOU_RATHERS } from '../utils/queries';
-import { GET_RANDOM_WOULD_YOU_RATHERS } from '../utils/queries'; 
+import { GET_RANDOM_WOULD_YOU_RATHERS, GET_RANDOM_ICEBREAKERS, GET_JOKES } from '../utils/queries'; 
 
 const Results = () => {
     const { selection, addFavorite, removeFavorite } = useIcebreaker();
 
         // Map titles to GraphQL queries
         const queryMap = {
-            // "Icebreaker Question": GET_ICEBREAKER_QUESTIONS,
-            // "Joke": GET_JOKES,
+            "Icebreaker Question": GET_RANDOM_ICEBREAKERS,
+            "Joke": GET_JOKES,
             "This or That": GET_RANDOM_WOULD_YOU_RATHERS,
             // "Dumb Laws": GET_LAWS,
             // "Random Facts": GET_ICEBREAKER_QUESTIONS, // Modify this once we have api set up

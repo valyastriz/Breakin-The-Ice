@@ -60,10 +60,10 @@ export const GET_ICEBREAKER_QUESTIONS = gql`
 
 export const GET_JOKES = gql`
   query GetJokes {
-    jokes {
+    getJokes {
       id
-      title
-      description
+      content
+      __typename
     }
   }
 `;
@@ -94,4 +94,14 @@ export const GET_RANDOM_WOULD_YOU_RATHERS = gql`
             __typename
         }
     }
+`;
+
+export const GET_RANDOM_ICEBREAKERS = gql`
+  query getRandomIceBreakers($limit: Int!) {
+    getRandomIceBreakers(limit: $limit) {
+      _id
+      content
+      __typename
+    }
+  }
 `;

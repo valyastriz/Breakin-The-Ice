@@ -28,6 +28,7 @@ const Navbar = ({ navOpen }) => {
                 <Box>
                     <Button component={RouterLink} to="/" sx={{ width: '100%', padding: '12px 0' }}>Home</Button>
                     <Button component={RouterLink} to="/favorites" sx={{ width: '100%', padding: '12px 0' }}>Favorites</Button>
+                    <Button component={RouterLink} to="/login" sx={{ width: '100%', padding: '12px 0' }}>Login</Button>
                     <Button component={RouterLink} to="/about" sx={{ width: '100%', padding: '12px 0' }}>About</Button>
                     <Button component={RouterLink} to="/contact" sx={{ width: '100%', padding: '12px 0' }}>Contact</Button>
                     <Button component={RouterLink} to="/buyusacoffee" sx={{ width: '100%', padding: '12px 0' }}>Buy us a coffee!</Button>
