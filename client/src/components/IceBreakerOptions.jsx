@@ -13,7 +13,7 @@ const IceBreakerOptions = () => {
         { id: 3, title: "This or That", description: "Fun this or that choices to start conversations." },
         { id: 4, title: "Dumb Laws", description: "Amuse yourself with some of the most absurd laws in the world." },
         { id: 5, title: "Random Facts", description: "Learn and share interesting random facts." },
-        { id: 6, title: "Motivational Quotes", description: "Inspirational quotes to motivate you and others." }
+        { id: 6, title: "Random Quotes", description: "A selection of random quotes to inspire thought and reflection." }
     ];
 
     // Function to handle selection

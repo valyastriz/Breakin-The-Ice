@@ -60,10 +60,10 @@ export const GET_ICEBREAKER_QUESTIONS = gql`
 
 export const GET_JOKES = gql`
   query GetJokes {
-    jokes {
+    getJokes {
       id
-      title
-      description
+      content
+      __typename
     }
   }
 `;

@@ -3,9 +3,7 @@ const { gql } = require('apollo-server-express');
 const thirdPartyAPISchema = gql`
   type Joke {
     id: ID!
-    type: String!
-    setup: String!
-    punchline: String!
+    content: String! 
   }
 
   type Quote {
