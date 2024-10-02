@@ -1,8 +1,14 @@
 import { Box, Typography, TextField, Button, Checkbox, FormControlLabel, Link } from '@mui/material';
+import { useNavigate } from 'react-router-dom';
 import { useTheme } from '@mui/material/styles';
 
 const Login = () => {
-  const theme = useTheme(); // Use the theme you defined
+  const navigate = useNavigate(); // Create navigate function
+
+  const handleSignUp = () => {
+    navigate('/signup'); // Redirect to the signup page
+  };
+  const theme = useTheme(); // Use the theme we defined in theme
 
   return (
     <Box
@@ -18,7 +24,7 @@ const Login = () => {
     >
       <Box
         sx={{
-          maxWidth: 400,
+          maxWidth: 500,
           width: '100%',
           padding: 4,
           backgroundColor: theme.palette.background.paper,  // Use paper background from theme
@@ -94,8 +100,11 @@ const Login = () => {
           sx={{ textAlign: 'center', color: theme.palette.text.secondary }}
         >
           Don't have an account?{' '}
-          <Link href="#" sx={{ color: theme.palette.primary.main, textDecoration: 'none' }}>
-            Sign Up
+          <Link
+            onClick={handleSignUp} // Call the function to navigate
+            sx={{ color: 'primary.main', cursor: 'pointer', textDecoration: 'none' }}
+          >
+            Sign up
           </Link>
         </Typography>
       </Box>
