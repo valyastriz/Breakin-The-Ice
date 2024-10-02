@@ -1,8 +1,12 @@
 import { Box } from '@mui/material';
+import { useNavigate } from 'react-router-dom';
+import { useIcebreaker } from '../Context/IcebreakerContext';
 import IceBreakerCard from './IceBreakerCard';
 
 const IceBreakerOptions = () => {
-    // Define the array of options within the component
+    const { setSelection } = useIcebreaker();  // Context hook to set selected option
+    const navigate = useNavigate();  // Hook for navigation
+
     const icebreakerOptions = [
         { id: 1, title: "Icebreaker Question", description: "Generate engaging questions to break the ice." },
         { id: 2, title: "Joke", description: "Lighten the mood with a random joke." },
@@ -12,10 +16,21 @@ const IceBreakerOptions = () => {
         { id: 6, title: "Motivational Quotes", description: "Inspirational quotes to motivate you and others." }
     ];
 
+    // Function to handle selection
+    const handleSelect = (option) => {
+        setSelection(option);  // Set the selection in context
+        navigate('/results');  // Navigate to the results page
+    };
+
     return (
         <Box sx={{ display: 'flex', flexWrap: 'wrap', justifyContent: 'center', padding: 2 }}>
             {icebreakerOptions.map(option => (
-                <IceBreakerCard key={option.id} title={option.title} description={option.description} />
+                <IceBreakerCard
+                    key={option.id}
+                    title={option.title}
+                    description={option.description}
+                    onClick={() => handleSelect(option)}
+                />
             ))}
         </Box>
     );

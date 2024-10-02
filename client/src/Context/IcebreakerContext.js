@@ -4,13 +4,23 @@ const IcebreakerContext = createContext();
 
 export const IcebreakerProvider = ({ children }) => {
     const [selection, setSelection] = useState(null);
+    const [favorites, setFavorites] = useState([]);
+
+    const addFavorite = item => {
+        if (!favorites.some(favorite => favorite.id === item.id)) {
+            setFavorites([...favorites, item]);
+        }
+    };
+
+    const removeFavorite = itemId => {
+        setFavorites(favorites.filter(item => item.id !== itemId));
+    };
 
     return (
-        <IcebreakerContext.Provider value={{ selection, setSelection }}>
+        <IcebreakerContext.Provider value={{ selection, setSelection, favorites, addFavorite, removeFavorite }}>
             {children}
         </IcebreakerContext.Provider>
     );
 };
 
-// Custom hook for using this context
 export const useIcebreaker = () => useContext(IcebreakerContext);
