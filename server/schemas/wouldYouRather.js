@@ -9,6 +9,7 @@ const wouldYouRatherSchema = gql`
   extend type Query {
     wouldYouRathers: [WouldYouRather]!
     wouldYouRather(id: ID!): WouldYouRather
+    getRandomWouldYouRathers(limit: Int!): [WouldYouRather]
   }
 
   extend type Mutation {

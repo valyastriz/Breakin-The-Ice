@@ -86,3 +86,13 @@ export const GET_WOULD_YOU_RATHER = gql`
     }
   }
 `;
+
+export const GET_RANDOM_WOULD_YOU_RATHERS = gql`
+    query GetRandomWouldYouRathers($limit: Int!) {
+        getRandomWouldYouRathers(limit: $limit) {
+            _id
+            question
+            __typename
+        }
+    }
+`;

@@ -3,7 +3,7 @@ import { Box,Typography, Input } from '@mui/material'
 import IceBreakerResults from '../components/IceBreakerResults';
 import { useIcebreaker} from '../Context/IcebreakerContext';
 // import { GET_ICEBREAKER_QUESTIONS, GET_JOKES, GET_LAWS, GET_WOULD_YOU_RATHERS } from '../utils/queries';
-import { GET_WOULD_YOU_RATHERS } from '../utils/queries';
+import { GET_RANDOM_WOULD_YOU_RATHERS } from '../utils/queries'; 
 
 const Results = () => {
     const { selection, addFavorite, removeFavorite } = useIcebreaker();
@@ -12,7 +12,7 @@ const Results = () => {
         const queryMap = {
             // "Icebreaker Question": GET_ICEBREAKER_QUESTIONS,
             // "Joke": GET_JOKES,
-            "This or That": GET_WOULD_YOU_RATHERS,
+            "This or That": GET_RANDOM_WOULD_YOU_RATHERS,
             // "Dumb Laws": GET_LAWS,
             // "Random Facts": GET_ICEBREAKER_QUESTIONS, // Modify this once we have api set up
             // "Motivational Quotes": GET_ICEBREAKER_QUESTIONS // Modify this once we have api set up
@@ -22,7 +22,8 @@ const Results = () => {
         console.log("Is selection title defined?", selection?.title);
         
         const { data, loading, error } = useQuery(queryMap[selection?.title], {
-            skip: !selection?.title, // Ensures query is skipped if selection title is not defined
+            skip: !selection?.title, // Skip if selection is not defined
+            variables: { limit: 10 }, // Query for 10 random results
         });
 
         // Extract results from the fetched data
