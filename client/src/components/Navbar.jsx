@@ -9,20 +9,26 @@ const Navbar = ({navOpen}) => {
 //   const { loading, data } = useQuery(QUERY_PROFILES);
 //   const profiles = data?.profiles || [];
 const theme = useTheme();
-const [width, setWidth] = useState(0);
+const [width, setWidth] = useState('0%');
 
-useEffect(() => {setWidth(width > 0 ? 0 : 200)},[navOpen]);
+useEffect(() => {
+  setWidth(navOpen ? '20%' : '0%');
+},[navOpen]);
 
   return (
     <Box sx={{
-      width:width, borderRight: width > 0 ? '3px solid lightgrey' : '',
+      width:width, 
+      borderRight: width !== '0%' ? '3px solid lightgrey' : '',
       transition: 'width ease-in-out 0.3s',
-      padding: width !== 0 ?'10px' : '',
+      padding: width !== '0%' ? '10px' : '',
       backgroundColor:theme.background.accent,
       }}>
-        {width !== 0 &&
+        {width !== '0%' &&
           <Box>
-            <Button sx={{width:'100%'}}>hey</Button>
+            <Button sx={{width:'100%'}}>Home</Button>
+            <Button sx={{width:'100%'}}>About</Button>
+            <Button sx={{width:'100%'}}>Contact</Button>
+            <Button sx={{width:'100%'}}>Buy us a coffee!</Button>
           </Box>
         }
       
