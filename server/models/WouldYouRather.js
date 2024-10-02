@@ -3,7 +3,7 @@ const { Schema, model } = require('mongoose');
 
 const wouldYouRatherSchema = new Schema(
   {
-    question: { type: String, required: true },
+    content: { type: String, required: true },
 
 });
 

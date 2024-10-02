@@ -25,7 +25,6 @@ export const GET_LAWS = gql`
     laws {
       _id
       description
-      location
     }
   }
 `;
@@ -91,7 +90,7 @@ export const GET_RANDOM_WOULD_YOU_RATHERS = gql`
     query GetRandomWouldYouRathers($limit: Int!) {
         getRandomWouldYouRathers(limit: $limit) {
             _id
-            question
+            content
             __typename
         }
     }

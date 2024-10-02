@@ -2,7 +2,9 @@ const lawResolvers = require('./law');
 const favoritesResolvers = require('./favorites');
 const wouldYouRatherResolvers = require('./wouldYouRather');
 const userResolvers = require('./user');
-const getRandomWouldYouRathers = require('./wouldYouRather');
+const jokesResolvers = require('./jokes');
+const factsResolvers = require('./facts');
+const quotesResolvers = require('./quotes');
 
 const resolvers = {
   Query: {
@@ -10,6 +12,9 @@ const resolvers = {
     ...lawResolvers.Query,
     ...wouldYouRatherResolvers.Query,
     ...userResolvers.Query,
+    ...jokesResolvers.Query,
+    ...factsResolvers.Query,
+    ...quotesResolvers.Query,
   },
   Mutation: {
     ...favoritesResolvers.Mutation,
