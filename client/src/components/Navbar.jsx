@@ -25,10 +25,11 @@ useEffect(() => {
       }}>
         {width !== '0%' &&
           <Box>
-            <Button sx={{width:'100%'}}>Home</Button>
-            <Button sx={{width:'100%'}}>About</Button>
-            <Button sx={{width:'100%'}}>Contact</Button>
-            <Button sx={{width:'100%'}}>Buy us a coffee!</Button>
+            <Button sx={{width:'100%', padding: '12px 0'}}>Home</Button>
+            <Button sx={{width:'100%', padding: '12px 0'}}>Favorites</Button>
+            <Button sx={{width:'100%', padding: '12px 0'}}>About</Button>
+            <Button sx={{width:'100%', padding: '12px 0'}}>Contact</Button>
+            <Button sx={{width:'100%', padding: '12px 0'}}>Buy us a coffee!</Button>
           </Box>
         }
       
