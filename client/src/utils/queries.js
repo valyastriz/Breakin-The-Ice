@@ -95,3 +95,4 @@ export const GET_RANDOM_WOULD_YOU_RATHERS = gql`
         }
     }
 `;
+
