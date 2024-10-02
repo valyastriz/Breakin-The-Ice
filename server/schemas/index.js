@@ -3,6 +3,7 @@ const wouldYouRatherSchema = require('./wouldYouRather');
 const userSchema = require('./user'); 
 const favoritesSchema = require('./favorites'); 
 const { gql } = require('apollo-server-express');
+const thirdPartyAPISchema = require('./thirdPartyAPIs'); 
 
 const rootSchema = gql`
   type Query {
@@ -14,4 +15,4 @@ const rootSchema = gql`
   }
 `;
 
-module.exports = [rootSchema, favoritesSchema, lawSchema, wouldYouRatherSchema, userSchema];
+module.exports = [rootSchema, favoritesSchema, lawSchema, wouldYouRatherSchema, userSchema, thirdPartyAPISchema];

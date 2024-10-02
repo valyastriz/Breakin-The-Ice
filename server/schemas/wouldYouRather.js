@@ -3,16 +3,17 @@ const { gql } = require('apollo-server-express');
 const wouldYouRatherSchema = gql`
   type WouldYouRather {
     _id: ID!
-    question: String!
+    content: String!
   }
 
   extend type Query {
     wouldYouRathers: [WouldYouRather]!
     wouldYouRather(id: ID!): WouldYouRather
+    getRandomWouldYouRathers(limit: Int!): [WouldYouRather]
   }
 
   extend type Mutation {
-    addWouldYouRather(question: String!): WouldYouRather
+    addWouldYouRather(content: String!): WouldYouRather
     removeWouldYouRather(id: ID!): WouldYouRather
   }
 `;
