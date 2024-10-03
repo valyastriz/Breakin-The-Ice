@@ -42,23 +42,21 @@ const Results = () => {
             </Typography>
             <Box sx={{ display: 'flex', flexWrap: 'wrap', justifyContent: 'center' }}>
                 {results.map((result, index) => {
-                    const itemId = result._id || result.someOtherId; // Use the actual ID of the item
-                    const isFavorited = favorites.some(fav => 
-                        fav.favoriteId === itemId || fav.thirdPartyContent === result.content
-                    );
+                    const uniqueId = result._id || result.someOtherId || `custom-id-${index}`;  // Ensure unique id for each item
+                    const isFavorited = favorites.some(fav => fav.favoriteId === uniqueId || fav.thirdPartyContent === result.content);
 
                     return (
                         <IceBreakerCard
-                            key={itemId || index} // Use unique key for the card
+                            key={uniqueId} // Use unique id as key
                             title={selection?.title}
                             description={result.content}
                             showHeart={true}
-                            isFavorited={isFavorited} // Highlight heart if favorited
+                            isFavorited={isFavorited} // Toggle heart based on whether it's favorited
                             onFavoriteClick={() => {
                                 if (isFavorited) {
-                                    removeFavorite(result.content || itemId);  // Remove favorite by content or itemId
+                                    removeFavorite(result.content || uniqueId);  // Remove favorite by content or uniqueId
                                 } else {
-                                    addFavorite({ ...result, favoriteId: itemId, title: selection?.title });  // Add favorite
+                                    addFavorite({ ...result, favoriteId: uniqueId, title: selection?.title });  // Add favorite
                                 }
                             }}
                         />
