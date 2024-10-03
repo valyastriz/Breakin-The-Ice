@@ -1,9 +1,10 @@
 const db = require('../config/connection');
-const { WouldYouRather, IceBreaker, User } = require('../models'); 
+const { WouldYouRather, IceBreaker, User, Law } = require('../models'); 
 const wouldYouRatherSeeds = require('./wouldYouRatherSeeds.json');
 const iceBreakerSeeds = require('./iceBreakerSeeds.json');
 const cleanDB = require('./cleanDB');
 const userSeeds = require('./userSeeds.json');
+const lawSeeds = require('./lawSeeds.json');
 
 
 db.once('open', async () => {
@@ -23,6 +24,10 @@ db.once('open', async () => {
     await cleanDB('User', 'user');
 
     await User.create(userSeeds);
+
+    await cleanDB('Law', 'lawSeeds');
+
+    await Law.create(lawSeeds);
 
     console.log('All done!');
   } catch (error) {

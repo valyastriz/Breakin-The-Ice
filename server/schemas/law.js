@@ -3,8 +3,7 @@ const { gql } = require('apollo-server-express');
 const lawSchema = gql`
   type Law {
     _id: ID!
-    description: String!
-    location: String!
+    content: String!
   }
 
   extend type Query {
