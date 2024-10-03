@@ -7,6 +7,10 @@ const userSchema = gql`
     email: String!
     favorites: [String] 
   }
+  type Auth {
+    token: ID!
+    user: User
+  }
 
   extend type Query {
     users: [User]!
@@ -14,8 +18,12 @@ const userSchema = gql`
   }
 
   extend type Mutation {
-    addUser(name: String!, email: String!): User
-    removeUser(userId: ID!): User
+    addUser(name: String!, email: String!, password: String!): Auth
+    login(email: String!, password: String!): Auth
+  
+
+    addFavorite(userId: ID!, favorites: String!): User
+    removeFavorite(favorites: String!): User
   }
 `;
 
