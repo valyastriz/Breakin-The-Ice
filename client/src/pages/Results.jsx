@@ -3,7 +3,7 @@ import { Box,Typography, Input } from '@mui/material'
 import IceBreakerResults from '../components/IceBreakerResults';
 import { useIcebreaker} from '../Context/IcebreakerContext';
 // import { GET_ICEBREAKER_QUESTIONS, GET_JOKES, GET_LAWS, GET_WOULD_YOU_RATHERS } from '../utils/queries';
-import { GET_RANDOM_WOULD_YOU_RATHERS, GET_RANDOM_ICEBREAKERS, GET_JOKES, GET_FACTS } from '../utils/queries'; 
+import { GET_RANDOM_WOULD_YOU_RATHERS, GET_RANDOM_ICEBREAKERS, GET_JOKES, GET_FACTS, GET_QUOTES } from '../utils/queries'; 
 
 const Results = () => {
     const { selection, addFavorite, removeFavorite } = useIcebreaker();
@@ -15,7 +15,7 @@ const Results = () => {
             "This or That": GET_RANDOM_WOULD_YOU_RATHERS,
             // "Dumb Laws": GET_LAWS,
             "Useless Facts": GET_FACTS,
-            // "Motivational Quotes": GET_ICEBREAKER_QUESTIONS // Modify this once we have api set up
+            "Random Quotes": GET_QUOTES
         };
 
         console.log("Query to execute:", queryMap[selection?.title]);
@@ -85,7 +85,8 @@ const Results = () => {
             flexDirection: 'column', 
             alignItems: 'center', 
             justifyContent: 'center', 
-            height: '100vh', 
+            height: '100%', 
+            minHeight: '100vh',
             width: '100%'
         }}>
             <Typography variant='h3' sx={{ textAlign: 'center', width: '80%' }}>

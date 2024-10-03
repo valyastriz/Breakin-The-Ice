@@ -115,3 +115,13 @@ export const GET_FACTS = gql`
     }
   }
 `;
+
+export const GET_QUOTES = gql`
+  query GetQuotes {
+    getQuotes {
+      _id
+      content
+      __typename
+    }
+  }
+`;

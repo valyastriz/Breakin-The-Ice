@@ -9,7 +9,6 @@ const thirdPartyAPISchema = gql`
   type Quote {
     _id: ID!
     content: String!
-    author: String!
   }
 
   type Fact {
