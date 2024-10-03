@@ -1,6 +1,7 @@
-import { Card, CardContent, Typography, Divider, CardActionArea } from '@mui/material';
+import { Card, CardContent, Typography, Divider, CardActionArea, IconButton } from '@mui/material';
+import FavoriteIcon from '@mui/icons-material/Favorite';
 
-const IceBreakerCard = ({ title, description, onClick }) => (
+const IceBreakerCard = ({ title, description, showHeart, onClick, onFavoriteClick, isFavorited }) => (
     <Card sx={{ minWidth: 275, maxWidth: 300, margin: 2 }}>
         <CardActionArea onClick={onClick}>
             <CardContent>
@@ -17,6 +18,19 @@ const IceBreakerCard = ({ title, description, onClick }) => (
                 <Typography variant="body2">
                     {description}
                 </Typography>
+
+                {/* Conditionally render the heart icon */}
+                {showHeart && (
+                    <IconButton
+                        onClick={(e) => {
+                            e.stopPropagation(); // Prevent triggering the card click when clicking the heart
+                            onFavoriteClick();
+                        }}
+                        aria-label="add to favorites"
+                    >
+                        <FavoriteIcon color={isFavorited ? 'error' : 'default'} />
+                    </IconButton>
+                )}
             </CardContent>
         </CardActionArea>
     </Card>

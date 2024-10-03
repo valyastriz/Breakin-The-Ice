@@ -1,100 +1,68 @@
 import { useQuery } from '@apollo/client';
-import { Box,Typography, Input } from '@mui/material'
-import IceBreakerResults from '../components/IceBreakerResults';
-import { useIcebreaker} from '../Context/IcebreakerContext';
-// import { GET_ICEBREAKER_QUESTIONS, GET_JOKES, GET_LAWS, GET_WOULD_YOU_RATHERS } from '../utils/queries';
-import { GET_RANDOM_WOULD_YOU_RATHERS, GET_RANDOM_ICEBREAKERS, GET_JOKES, GET_FACTS, GET_QUOTES } from '../utils/queries'; 
+import { Box, Typography } from '@mui/material';
+import IceBreakerCard from '../components/IceBreakerCard';
+import { useIcebreaker } from '../Context/IcebreakerContext';
+import { GET_RANDOM_WOULD_YOU_RATHERS, GET_RANDOM_ICEBREAKERS, GET_JOKES, GET_FACTS, GET_QUOTES } from '../utils/queries';
 
 const Results = () => {
-    const { selection, addFavorite, removeFavorite } = useIcebreaker();
+    const { selection, addFavorite, removeFavorite, favorites } = useIcebreaker();
 
-        // Map titles to GraphQL queries
-        const queryMap = {
-            "Icebreaker Question": GET_RANDOM_ICEBREAKERS,
-            "Joke": GET_JOKES,
-            "This or That": GET_RANDOM_WOULD_YOU_RATHERS,
-            // "Dumb Laws": GET_LAWS,
-            "Useless Facts": GET_FACTS,
-            "Random Quotes": GET_QUOTES
-        };
+    // Map titles to GraphQL queries
+    const queryMap = {
+        "Icebreaker Question": GET_RANDOM_ICEBREAKERS,
+        "Joke": GET_JOKES,
+        "This or That": GET_RANDOM_WOULD_YOU_RATHERS,
+        "Useless Facts": GET_FACTS,
+        "Random Quotes": GET_QUOTES
+    };
 
-        console.log("Query to execute:", queryMap[selection?.title]);
-        console.log("Is selection title defined?", selection?.title);
-        
-        const { data, loading, error } = useQuery(queryMap[selection?.title], {
-            skip: !selection?.title, // Skip if selection is not defined
-            variables: { limit: 10 }, // Query for 10 random results
-        });
+    const { data, loading, error } = useQuery(queryMap[selection?.title], {
+        skip: !selection?.title,
+        variables: { limit: 10 },
+    });
 
-        // Extract results from the fetched data
-        const results = data ? data[Object.keys(data)[0]] : [];
-        console.log("Results object:", results);
+    const results = data ? data[Object.keys(data)[0]] : [];
 
-            // Handle loading and error states
-        if (loading) return <Typography>Loading...</Typography>;
-        if (error) {
-            console.error("GraphQL Error:", error);
-            return <Typography>Error: {error.message}</Typography>;
-        }
-
-    // const getResults = () => {
-    //     switch (selection?.title) {
-    //         case "Icebreaker Question":
-    //             return [
-    //                 { id: 1, title: "Get to Know", description: "If you could write a book, what genre would it be about?" },
-    //                 { id: 2, title: "Deep Dive", description: "What’s something that everyone, absolutely everyone, in the entire world can agree on?" },
-    //                 { id: 3, title: "Casual", description: "What’s the best thing you’ve got going on in your life at the moment?" }
-    //             ];
-    //         case "Joke":
-    //             return [
-    //                 { id: 1, title: "Classic Joke", description: "Why don't scientists trust atoms? Because they make up everything!" },
-    //                 { id: 2, title: "Office Joke", description: "I told my wife she should embrace her mistakes. She gave me a hug." }
-    //             ];
-    //         case "This or That":
-    //             return [
-    //                 { id: 1, title: "Preference", description: "Coffee or Tea?" },
-    //                 { id: 2, title: "Daily Choices", description: "Books or Movies?" }
-    //             ];
-    //         case "Dumb Laws":
-    //             return [
-    //                 { id: 1, title: "Unexpected Law", description: "In Arizona, it is illegal for a donkey to sleep in a bathtub." },
-    //                 { id: 2, title: "Odd Law", description: "In Connecticut, a pickle must bounce to officially be considered a pickle." }
-    //             ];
-    //         case "Random Facts":
-    //             return [
-    //                 { id: 1, title: "Nature Fact", description: "Bananas are curved because they grow towards the sun." },
-    //                 { id: 2, title: "Historical Fact", description: "Vikings used the bones of slain animals when smithing new weapons believing this would enchant the weapon with the animal's spirit." }
-    //             ];
-    //         case "Motivational Quotes":
-    //             return [
-    //                 { id: 1, title: "Inspire", description: "The only limit to our realization of tomorrow will be our doubts of today. —Franklin D. Roosevelt" },
-    //                 { id: 2, title: "Determination", description: "It is our attitude at the beginning of a difficult task which, more than anything else, will affect its successful outcome. —William James" }
-    //             ];
-    //         default:
-    //             return [];
-    //     }
-    // };
-
-    // // Temporary or fetched data
-    // const results = getResults();
+    if (loading) return <Typography>Loading...</Typography>;
+    if (error) return <Typography>Error: {error.message}</Typography>;
 
     return (
         <Box sx={{
-            display: 'flex', 
-            flexGrow: 1, 
-            flexDirection: 'column', 
-            alignItems: 'center', 
-            justifyContent: 'center', 
-            height: '100%', 
+            display: 'flex',
+            flexGrow: 1,
+            flexDirection: 'column',
+            alignItems: 'center',
+            justifyContent: 'center',
+            height: '100%',
             minHeight: '100vh',
             width: '100%'
         }}>
             <Typography variant='h3' sx={{ textAlign: 'center', width: '80%' }}>
                 {selection ? `${selection.title}` : "No selection made"}
             </Typography>
-            <IceBreakerResults results={results}
-            title={selection?.title} 
-            onAddFavorite={addFavorite} onRemoveFavorite={removeFavorite} />
+            <Box sx={{ display: 'flex', flexWrap: 'wrap', justifyContent: 'center' }}>
+                {results.map((result, index) => {
+                    const uniqueId = result._id || result.someOtherId || `custom-id-${index}`;  // Ensure unique id for each item
+                    const isFavorited = favorites.some(fav => fav.favoriteId === uniqueId || fav.thirdPartyContent === result.content);
+
+                    return (
+                        <IceBreakerCard
+                            key={uniqueId} // Use unique id as key
+                            title={selection?.title}
+                            description={result.content}
+                            showHeart={true}
+                            isFavorited={isFavorited} // Toggle heart based on whether it's favorited
+                            onFavoriteClick={() => {
+                                if (isFavorited) {
+                                    removeFavorite(result.content || uniqueId);  // Remove favorite by content or uniqueId
+                                } else {
+                                    addFavorite({ ...result, favoriteId: uniqueId, title: selection?.title });  // Add favorite
+                                }
+                            }}
+                        />
+                    );
+                })}
+            </Box>
         </Box>
     );
 };

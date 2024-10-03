@@ -1,16 +1,20 @@
-import { Collapse, Box, Button, Typography } from '@mui/material'
-import {useEffect, useState} from 'react';
+import { Collapse, Box, Button } from '@mui/material';
+import { useEffect, useState } from 'react';
 import { useTheme } from '@mui/material/styles';
 import { Link as RouterLink } from 'react-router-dom'; 
-
-
+import AuthService from '../utils/auth';  // Import your AuthService to check login status
 
 const Navbar = ({ navOpen }) => {
     const theme = useTheme();
     const [width, setWidth] = useState('20%');
+    const [isLoggedIn, setIsLoggedIn] = useState(false);  // Track login status
 
     useEffect(() => {
         setWidth(navOpen ? '0%' : '20%');
+
+        // Check if the user is logged in
+        const loggedIn = AuthService.loggedIn();  // Call the method to check login status
+        setIsLoggedIn(loggedIn);
     }, [navOpen]);
 
     return (
@@ -27,8 +31,24 @@ const Navbar = ({ navOpen }) => {
             {width !== '0%' && (
                 <Box>
                     <Button component={RouterLink} to="/" sx={{ width: '100%', padding: '12px 0' }}>Home</Button>
-                    <Button component={RouterLink} to="/favorites" sx={{ width: '100%', padding: '12px 0' }}>Favorites</Button>
-                    <Button component={RouterLink} to="/login" sx={{ width: '100%', padding: '12px 0' }}>Login</Button>
+                    
+                    {/* Conditionally render based on login status */}
+                    {isLoggedIn ? (
+                        <>
+                            <Button component={RouterLink} to="/favorites" sx={{ width: '100%', padding: '12px 0' }}>Favorites</Button>
+                            <Button 
+                                sx={{ width: '100%', padding: '12px 0' }} 
+                                onClick={() => {
+                                    AuthService.logout();  // Call AuthService to log out
+                                    window.location.assign('/');  // Redirect after logging out
+                                }}>
+                                Logout
+                            </Button>
+                        </>
+                    ) : (
+                        <Button component={RouterLink} to="/login" sx={{ width: '100%', padding: '12px 0' }}>Login</Button>
+                    )}
+
                     <Button component={RouterLink} to="/about" sx={{ width: '100%', padding: '12px 0' }}>About</Button>
                     <Button component={RouterLink} to="/contact" sx={{ width: '100%', padding: '12px 0' }}>Contact</Button>
                     <Button component={RouterLink} to="/buyusacoffee" sx={{ width: '100%', padding: '12px 0' }}>Buy us a coffee!</Button>

@@ -1,5 +1,4 @@
 const lawResolvers = require('./law');
-const favoritesResolvers = require('./favorites');
 const wouldYouRatherResolvers = require('./wouldYouRather');
 const iceBreakerResolvers = require('./iceBreaker');
 const userResolvers = require('./user');
@@ -9,7 +8,6 @@ const quotesResolvers = require('./quotes');
 
 const resolvers = {
   Query: {
-    ...favoritesResolvers.Query,
     ...lawResolvers.Query,
     ...wouldYouRatherResolvers.Query,
     ...iceBreakerResolvers.Query,
@@ -19,7 +17,6 @@ const resolvers = {
     ...quotesResolvers.Query,
   },
   Mutation: {
-    ...favoritesResolvers.Mutation,
     ...lawResolvers.Mutation,
     ...wouldYouRatherResolvers.Mutation,
     ...userResolvers.Mutation,

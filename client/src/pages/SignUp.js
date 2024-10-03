@@ -1,10 +1,48 @@
-import { Box, Typography, TextField, Button, Checkbox, FormControlLabel, Link } from '@mui/material';
+import React, { useState } from 'react';
+import { Box, Typography, TextField, Button, Link } from '@mui/material';
 import { useTheme } from '@mui/material/styles';
 import { useNavigate } from 'react-router-dom'; 
+import { useMutation } from '@apollo/client';
+import { ADD_USER } from '../utils/mutations'; // Import your signup mutation
+import AuthService from '../utils/auth'; // Import AuthService for handling login
 
 const SignUp = () => {
-  const theme = useTheme(); // Use the dark theme
-  const navigate = useNavigate(); // Create navigate function
+  const [username, setUsername] = useState('');  // State for username
+  const [email, setEmail] = useState('');  // State for email
+  const [password, setPassword] = useState('');  // State for password
+  const theme = useTheme();
+  const navigate = useNavigate();
+
+  // Signup mutation hook
+  const [addUser, { error }] = useMutation(ADD_USER);
+
+  // Handle form submission
+  const handleSubmit = async (event) => {
+    event.preventDefault();
+  
+    try {
+      const { data } = await addUser({
+        variables: { username, email, password }
+      });
+  
+      // Store the token using the AuthService
+      AuthService.login(data.addUser.token);
+  
+      // Redirect to the homepage or dashboard after successful signup
+      navigate('/dashboard');
+    } catch (e) {
+      console.error('Signup error:', e); // Log the error for debugging
+      if (e.graphQLErrors) {
+        e.graphQLErrors.forEach(err => {
+          console.error('GraphQL error:', err.message);
+        });
+      } else if (e.networkError) {
+        console.error('Network error:', e.networkError.message);
+      } else {
+        console.error('Unknown error:', e.message);
+      }
+    }
+  };
 
   const handleLogin = () => {
     navigate('/login'); // Redirect to the login page
@@ -17,17 +55,21 @@ const SignUp = () => {
         flexDirection: 'column',
         alignItems: 'center',
         justifyContent: 'center',
+        minheight: '100%',
         height: '100vh',
         width: '100%',
-        backgroundColor: theme.palette.background.default, // Use the theme background
+        overflow: 'auto',
+        backgroundColor: theme.palette.background.default,
       }}
     >
       <Box
+        component="form"
+        onSubmit={handleSubmit}  // Form submission handler
         sx={{
           maxWidth: 500,
           width: '100%',
           padding: 4,
-          backgroundColor: theme.palette.background.paper, // Use theme paper background
+          backgroundColor: theme.palette.background.paper,
           borderRadius: 2,
           boxShadow: '0 2px 10px rgba(0, 0, 0, 0.1)',
         }}
@@ -44,32 +86,22 @@ const SignUp = () => {
         </Typography>
 
         {/* Form */}
-        <Typography variant="body2" sx={{ mb: 2, color: theme.palette.text.secondary }}>
-          Sign up with Email address
-        </Typography>
-
-        <Box sx={{ display: 'flex', gap: 1 }}>
-          <TextField
-            label="First Name"
-            variant="outlined"
-            fullWidth
-            margin="normal"
-            sx={{ mb: 2 }}
-          />
-          <TextField
-            label="Last Name"
-            variant="outlined"
-            fullWidth
-            margin="normal"
-            sx={{ mb: 2 }}
-          />
-        </Box>
-
         <TextField
-          label="Email Address / Username"
+          label="Username"
           variant="outlined"
           fullWidth
           margin="normal"
+          value={username}  // Bind value to state
+          onChange={(e) => setUsername(e.target.value)}  // Update state on change
+          sx={{ mb: 2 }}
+        />
+        <TextField
+          label="Email Address"
+          variant="outlined"
+          fullWidth
+          margin="normal"
+          value={email}  // Bind value to state
+          onChange={(e) => setEmail(e.target.value)}  // Update state on change
           sx={{ mb: 2 }}
         />
         <TextField
@@ -78,11 +110,14 @@ const SignUp = () => {
           variant="outlined"
           fullWidth
           margin="normal"
+          value={password}  // Bind value to state
+          onChange={(e) => setPassword(e.target.value)}  // Update state on change
           sx={{ mb: 2 }}
         />
 
         {/* Sign Up Button */}
         <Button
+          type="submit"  // Set type to submit to trigger form submission
           variant="contained"
           fullWidth
           sx={{
@@ -90,12 +125,15 @@ const SignUp = () => {
             color: theme.palette.text.primary,
             mb: 3,
             ':hover': {
-              backgroundColor: theme.palette.primary.hover, // Use hover from the theme
+              backgroundColor: theme.palette.primary.hover,  // Use hover from theme
             },
           }}
         >
           Sign Up
         </Button>
+
+        {/* Display signup error */}
+        {error && <Typography color="error" align="center">Signup failed. Please try again.</Typography>}
 
         {/* Sign In Link */}
         <Typography
@@ -104,7 +142,7 @@ const SignUp = () => {
         >
           Already have an account?{' '}
           <Link
-            onClick={handleLogin} // Navigate to login page
+            onClick={handleLogin}  // Navigate to login page
             sx={{ color: theme.palette.primary.main, cursor: 'pointer', textDecoration: 'none' }}
           >
             Sign In

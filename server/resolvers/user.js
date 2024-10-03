@@ -1,5 +1,6 @@
 const { User } = require('../models');
-const { signToken, AuthenticationError } = require('../utils/auth');
+const { signToken } = require('../utils/auth');
+const { AuthenticationError } = require('apollo-server-express'); // Correct import
 
 const resolvers = {
   Query: {
@@ -7,66 +8,55 @@ const resolvers = {
       return User.find(); 
     },
     user: async (parent, { userId }) => {
-      return User.findOne({ _id: userId }); 
+      return User.findOne({ _id: userId });
     },
-
     me: async (parent, args, context) => {
       if (context.user) {
         return User.findOne({ _id: context.user._id });
       }
-      throw AuthenticationError;
+      throw new AuthenticationError('Not logged in');
     },
   },
-
   Mutation: {
-    addUser: async (parent, { name, email, password }) => {
-      const user = await User.create({ name, email, password, favorites: [] }); 
+    addUser: async (parent, { username, email, password }) => {
+      const user = await User.create({ username, email, password, savedFavorites: [] });
       const token = signToken(user);
-
       return { token, user };
     },
-
     login: async (parent, { email, password }) => {
       const user = await User.findOne({ email });
-
       if (!user) {
-        throw AuthenticationError;
+        throw new AuthenticationError('Incorrect credentials');
       }
-
       const correctPw = await user.isCorrectPassword(password);
-
       if (!correctPw) {
-        throw AuthenticationError;
+        throw new AuthenticationError('Incorrect credentials');
       }
-
       const token = signToken(user);
       return { token, user };
     },
-
-    addFavorite: async (parent, { userId, favorite }, context) => {
+    addFavorite: async (parent, { favoriteId, thirdPartyContent, title, description }, context) => {
       if (context.user) {
+        // Debugging: Log the favoriteId to see if it exists and is correct
+        console.log("favoriteId:", favoriteId);
+        
         return User.findOneAndUpdate(
-          { _id: userId },
-          {
-            $addToSet: { favorites: favorite },
-          },
-          {
-            new: true,
-            runValidators: true,
-          }
+          { _id: context.user._id },
+          { $addToSet: { savedFavorites: { favoriteId, thirdPartyContent, title, description } } },
+          { new: true, runValidators: true }
         );
-    }
-    throw AuthenticationError;
-  },
-    removeFavorite: async (parent, { userId, favorite }, context) => {
+      }
+      throw new AuthenticationError('Not logged in');
+    },
+    removeFavorite: async (parent, { favoriteId }, context) => {
       if (context.user) {
         return User.findOneAndUpdate(
           { _id: context.user._id },
-          { $pull: { favorites: favorite } },
+          { $pull: { savedFavorites: { favoriteId } } },
           { new: true }
         );
       }
-      throw AuthenticationError;
+      throw new AuthenticationError('Not logged in');
     },
   },
 };
