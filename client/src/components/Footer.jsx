@@ -1,5 +1,6 @@
 // import { useQuery } from '@apollo/client';
-import { Box } from '@mui/material'
+import React from 'react';
+import { Box, Typography } from '@mui/material'
 
 // import { QUERY_PROFILES } from '../utils/queries';
 
@@ -8,8 +9,20 @@ const Footer = () => {
 //   const profiles = data?.profiles || [];
 
   return (
-    <Box>
-
+    <Box
+      sx={{
+        backgroundColor: 'primary.main',
+        color: 'white',
+        textAlign: 'center',
+        padding: 2,
+        position: 'absolute',
+        bottom: 0,
+        width: '100%'
+      }}
+    >
+      <Typography variant='body1'>
+        Let's break the ice and chill with some cool questions!
+      </Typography>
     </Box>
   );
 };
