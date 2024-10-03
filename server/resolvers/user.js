@@ -35,11 +35,14 @@ const resolvers = {
       const token = signToken(user);
       return { token, user };
     },
-    addFavorite: async (parent, { favoriteId, thirdPartyContent }, context) => {
+    addFavorite: async (parent, { favoriteId, thirdPartyContent, title, description }, context) => {
       if (context.user) {
+        // Debugging: Log the favoriteId to see if it exists and is correct
+        console.log("favoriteId:", favoriteId);
+        
         return User.findOneAndUpdate(
           { _id: context.user._id },
-          { $addToSet: { savedFavorites: { favoriteId, thirdPartyContent } } },
+          { $addToSet: { savedFavorites: { favoriteId, thirdPartyContent, title, description } } },
           { new: true, runValidators: true }
         );
       }

@@ -12,8 +12,10 @@ const userSchema = gql`
 
   # Define the Favorite type for handling both database favorites and third-party content
   type Favorite {
-    favoriteId: ID  # For database-stored favorites
-    thirdPartyContent: String  # For third-party API content
+    favoriteId: ID
+    thirdPartyContent: String
+    title: String   # Store the title for both database and third-party content
+    description: String  # Store the description for both database and third-party content
   }
 
   # Define the Auth type for authentication responses
@@ -33,8 +35,8 @@ const userSchema = gql`
   extend type Mutation {
     addUser(username: String!, email: String!, password: String!): Auth
     login(email: String!, password: String!): Auth
-    addFavorite(favoriteId: ID, thirdPartyContent: String): User  # Adds a favorite
-    removeFavorite(favoriteId: ID): User  # Removes a favorite by ID
+    addFavorite(favoriteId: ID, thirdPartyContent: String, title: String, description: String): User
+    removeFavorite(favoriteId: ID): User
   }
 `;
 

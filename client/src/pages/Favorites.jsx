@@ -11,17 +11,21 @@ const Favorites = () => {
                 Favorites
             </Typography>
             <Box sx={{ display: 'flex', flexWrap: 'wrap', justifyContent: 'center' }}>
-                {favorites.map((favorite) => (
-                    <IceBreakerCard
-                        key={favorite.id}
-                        title={favorite.title}
-                        description={favorite.description}
-                        showHeart={true}
-                        isFavorited={true}
-                        onFavoriteClick={() => removeFavorite(favorite.id)}
-                    />
-                ))}
-            </Box>
+            {favorites.map((favorite) => {
+              console.log("Favorite in Favorites Page:", favorite);  // Check the favorite details
+              
+              return (
+                <IceBreakerCard
+                  key={favorite.uniqureId || favorite.favoriteId}  // Use the correct key for the favorites
+                  title={favorite.title}
+                  description={favorite.description || favorite.thirdPartyContent}
+                  showHeart={true}
+                  isFavorited={true}
+                  onFavoriteClick={() => removeFavorite(favorite.uniqueId || favorite.favoriteId )}
+                />
+              );
+            })}
+          </Box>
         </Box>
     );
 };

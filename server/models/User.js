@@ -21,9 +21,11 @@ const userSchema = new Schema({
     {
       favoriteId: {
         type: Schema.Types.ObjectId, 
-        ref: 'Favorite', // Or handle third-party data directly here
+        ref: 'Favorite', // For database-stored icebreakers
       },
-      thirdPartyContent: String, // For third-party API data
+      thirdPartyContent: String, // For third-party API content
+      title: String,  // Store title directly
+      description: String, // Store description directly
     },
   ],
 }, {

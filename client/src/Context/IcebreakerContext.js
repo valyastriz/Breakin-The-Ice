@@ -1,4 +1,5 @@
 import React, { createContext, useContext, useState } from 'react';
+import { v4 as uuidv4 } from 'uuid';  // Import UUID library
 
 const IcebreakerContext = createContext();
 
@@ -8,16 +9,22 @@ export const IcebreakerProvider = ({ children }) => {
 
     // Add a favorite icebreaker if it isn't already in the list
     const addFavorite = item => {
-        if (!favorites.some(favorite => favorite.id === item.id)) {
-            setFavorites([...favorites, item]);
+        const newFavorite = {
+            ...item,
+            uniqueId: uuidv4(),  // Create a unique ID for each favorite
+        };
+
+        // Prevent adding duplicates based on the actual item's id or favoriteId
+        if (!favorites.some(favorite => favorite.favoriteId === newFavorite.favoriteId || favorite.thirdPartyContent === newFavorite.thirdPartyContent)) {
+            setFavorites([...favorites, newFavorite]); // Add the new favorite
         } else {
-            console.log("This item is already in your favorites."); // Optional feedback for duplicate favorites
+            console.log("Item is already in favorites");
         }
     };
 
-    // Remove a favorite icebreaker by its id
-    const removeFavorite = itemId => {
-        setFavorites(favorites.filter(item => item.id !== itemId));
+    // Remove a favorite icebreaker by its uniqueId
+    const removeFavorite = uniqueId => {
+        setFavorites(favorites.filter(item => item.uniqueId !== uniqueId));
     };
 
     return (
