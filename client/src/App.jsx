@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import Header from './components/Header';
 import Footer from './components/Footer';
@@ -11,18 +11,17 @@ import BuyUsACoffee from './pages/BuyUsACoffee';
 import Favorites from './pages/Favorites';
 import Login from './pages/Login';
 import SignUp from './pages/SignUp';
-import { Box, ThemeProvider, CssBaseline, createTheme } from '@mui/material';
-import theme from './Context/theme';
-import { useState } from 'react';
+import { Box, ThemeProvider, CssBaseline } from '@mui/material';
+import createAppTheme from './Context/theme';
 
 function App() {
   const [navOpen, setNavOpen] = useState(false);
-  const [themeMode, setThemeMode] = useState('dark'); // Initial state
+  const [themeMode, setThemeMode] = useState('dark');
 
   const toggleTheme = () => {
-    setThemeMode((prevMode) => (prevMode === 'dark' ? 'light' : 'dark')); // Toggle logic
+    setThemeMode((prevMode) => (prevMode === 'light' ? 'dark' : 'light')); // Toggle logic
   };
-  const currentTheme = createTheme(theme(themeMode)); // Get the theme based on the current mode
+  const currentTheme = createAppTheme(themeMode); 
 
 
   return (
@@ -35,14 +34,14 @@ function App() {
             <Navbar navOpen={navOpen} />
             <Box sx={{ flexGrow: 1 }}>
               <Routes>
-                <Route path="/" element={<Home />} />
-                <Route path="/results" element={<Results />} />
-                <Route path="/contact" element={<Contact />} />
-                <Route path="/about" element={<About />} />
-                <Route path="/buyusacoffee" element={<BuyUsACoffee />} />
-                <Route path="/favorites" element={<Favorites />} />
-                <Route path="/login" element={<Login />} />
-                <Route path="/signup" element={<SignUp />} />
+                <Route path="/" element={<Home setThemeMode={setThemeMode}/>} />
+                <Route path="/results" element={<Results setThemeMode={setThemeMode} />} />
+                <Route path="/contact" element={<Contact setThemeMode={setThemeMode}/>} />
+                <Route path="/about" element={<About setThemeMode={setThemeMode}/>} />
+                <Route path="/buyusacoffee" element={<BuyUsACoffee setThemeMode={setThemeMode}/>} />
+                <Route path="/favorites" element={<Favorites setThemeMode={setThemeMode}/>} />
+                <Route path="/login" element={<Login setThemeMode={setThemeMode}/>} />
+                <Route path="/signup" element={<SignUp setThemeMode={setThemeMode}/>} />
               </Routes>
             </Box>
           </Box>
