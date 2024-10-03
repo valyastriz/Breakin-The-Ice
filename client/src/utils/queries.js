@@ -24,7 +24,8 @@ export const GET_LAWS = gql`
   query GetLaws {
     laws {
       _id
-      description
+      content
+      __typename
     }
   }
 `;

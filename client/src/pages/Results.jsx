@@ -2,7 +2,7 @@ import { useQuery } from '@apollo/client';
 import { Box, Typography } from '@mui/material';
 import IceBreakerCard from '../components/IceBreakerCard';
 import { useIcebreaker } from '../Context/IcebreakerContext';
-import { GET_RANDOM_WOULD_YOU_RATHERS, GET_RANDOM_ICEBREAKERS, GET_JOKES, GET_FACTS, GET_QUOTES } from '../utils/queries';
+import { GET_RANDOM_WOULD_YOU_RATHERS, GET_RANDOM_ICEBREAKERS, GET_JOKES, GET_FACTS, GET_QUOTES, GET_LAWS } from '../utils/queries';
 
 const Results = () => {
     const { selection, addFavorite, removeFavorite, favorites } = useIcebreaker();
@@ -13,7 +13,8 @@ const Results = () => {
         "Joke": GET_JOKES,
         "This or That": GET_RANDOM_WOULD_YOU_RATHERS,
         "Useless Facts": GET_FACTS,
-        "Random Quotes": GET_QUOTES
+        "Random Quotes": GET_QUOTES,
+        "Dumb Laws": GET_LAWS,
     };
 
     const { data, loading, error } = useQuery(queryMap[selection?.title], {
