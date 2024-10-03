@@ -12,8 +12,6 @@ const resolvers = {
           headers: { 'X-Api-Key': process.env.RANDOM_QUOTES_API_KEY },  // Use the API key from .env
         });
 
-        console.log("API Response:", quotesResponse.data);  // Log the entire response
-
         // Extract the first quote from the array
         const quote = quotesResponse.data[0];  
 
