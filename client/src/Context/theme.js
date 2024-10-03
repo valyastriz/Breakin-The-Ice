@@ -124,5 +124,5 @@ const getDesignTokens = (mode) => ({
     },
   },
 });
-const theme = createTheme(getDesignTokens('dark'));
+const theme =  createTheme(getDesignTokens('dark'));
 export default theme;
