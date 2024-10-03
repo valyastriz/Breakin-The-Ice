@@ -27,7 +27,8 @@ const teamMembers = [
 
 const Contact = () => {
   return (
-    <Box sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center', padding: 4 }}>
+    <Box sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center', padding: 4, minheight: '100%',
+    height: '100vh' }}>
       <Typography variant='h3' sx={{ marginBottom: 4, textAlign: 'center' }}>
         Meet Our Team
       </Typography>

@@ -7,7 +7,7 @@ const About = () => {
 
  
   return (
-    <Container sx={{ padding: 4, backgroundColor: theme.palette.background.paper, borderRadius: 2, boxShadow: 2 }}>
+    <Container sx={{ padding: 4, backgroundColor: theme.palette.background.paper, borderRadius: 2, boxShadow: 2, minheight: '100%', height: '100vh' }}>
       <Box sx={{ textAlign: 'center', marginBottom: 6 }}>
         <Typography variant="h3" sx={{ marginBottom: 6, color: theme.palette.primary.main }}>
           About This Project

@@ -1,58 +1,56 @@
 const { Schema, model } = require('mongoose');
 const bcrypt = require('bcrypt');
-const { ObjectId } = Schema.Types;
 
-
-const favoriteSchema = require('./Favorite');
-
-const userSchema = new Schema(
-  {
-    username: {
-      type: String,
-      required: true,
-      unique: true,
-    },
-    email: {
-      type: String,
-      required: true,
-      unique: true,
-      match: [/.+@.+\..+/, 'Must use a valid email address'],
-    },
-    password: {
-      type: String,
-      required: true,
-    },
-    
-    savedFavorites: [{ type: ObjectId, ref: 'Favorite' }],
+const userSchema = new Schema({
+  username: {
+    type: String,
+    required: true,
+    unique: true,
   },
-  // set this to use virtual below
-  {
-    toJSON: {
-      virtuals: true,
+  email: {
+    type: String,
+    required: true,
+    unique: true,
+    match: [/.+@.+\..+/, 'Must use a valid email address'],
+  },
+  password: {
+    type: String,
+    required: true,
+  },
+  savedFavorites: [
+    {
+      favoriteId: {
+        type: Schema.Types.ObjectId, 
+        ref: 'Favorite', // Or handle third-party data directly here
+      },
+      thirdPartyContent: String, // For third-party API data
     },
-  }
-);
+  ],
+}, {
+  toJSON: {
+    virtuals: true,
+  },
+});
 
-// hash user password
+// Hash password middleware
 userSchema.pre('save', async function (next) {
   if (this.isNew || this.isModified('password')) {
     const saltRounds = 10;
     this.password = await bcrypt.hash(this.password, saltRounds);
   }
-
   next();
 });
 
-// custom method to compare and validate password for logging in
+// Compare password method
 userSchema.methods.isCorrectPassword = async function (password) {
   return bcrypt.compare(password, this.password);
 };
 
-// when we query a user, we'll also get another field called `favoriteCount` with the number of saved favorites we have
+// Virtual for the number of favorites
 userSchema.virtual('favoriteCount').get(function () {
   return this.savedFavorites.length;
 });
 
 const User = model('User', userSchema);
 
-module.exports = User, userSchema;
+module.exports = User;

@@ -7,7 +7,8 @@ const Favorites = () => {
 //   const profiles = data?.profiles || [];
 
   return (
-    <Box sx={{display:'flex', flexGrow: 1, flexDirection: 'column', alignItems: 'center', justifyContent: 'center', height: '100vh', width: '100%'}}>
+    <Box sx={{display:'flex', flexGrow: 1, flexDirection: 'column', alignItems: 'center', justifyContent: 'center', minheight: '100%',
+    height: '100vh', width: '100%'}}>
         <Typography variant='h3' sx={{ textAlign: 'center', width: '80%' }}>Favorites</Typography>
     </Box>
   );
