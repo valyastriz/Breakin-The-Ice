@@ -6,7 +6,16 @@ const Favorites = () => {
     const { favorites, removeFavorite } = useIcebreaker();
 
     return (
-        <Box sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', width: '100%' }}>
+        <Box sx={{ 
+          display: 'flex',
+          flexGrow: 1,
+          flexDirection: 'column',
+          alignItems: 'center',
+          justifyContent: 'center',
+          height: '100%',
+          minHeight: '100vh',
+          width: '100%'
+         }}>
             <Typography variant='h3' sx={{ textAlign: 'center', width: '80%' }}>
                 Favorites
             </Typography>
