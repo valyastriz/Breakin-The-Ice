@@ -24,7 +24,7 @@ const Header = ({setNavOpen, navOpen, toggleTheme}) => {
             display: 'flex',
             flexGrow: 1,
             minHeight: '80px',
-            backgroundColor: theme.palette.background.accent,
+            backgroundColor: theme.background.accent,
             alignItems: 'center',
             justifyContent: 'space-between'
         }}>
