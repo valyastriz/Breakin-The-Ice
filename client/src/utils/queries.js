@@ -105,3 +105,13 @@ export const GET_RANDOM_ICEBREAKERS = gql`
     }
   }
 `;
+
+export const GET_FACTS = gql`
+  query GetFacts {
+    getFacts {
+      id
+      content
+      __typename
+    }
+  }
+`;

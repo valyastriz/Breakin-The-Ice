@@ -3,7 +3,7 @@ import { Box,Typography, Input } from '@mui/material'
 import IceBreakerResults from '../components/IceBreakerResults';
 import { useIcebreaker} from '../Context/IcebreakerContext';
 // import { GET_ICEBREAKER_QUESTIONS, GET_JOKES, GET_LAWS, GET_WOULD_YOU_RATHERS } from '../utils/queries';
-import { GET_RANDOM_WOULD_YOU_RATHERS, GET_RANDOM_ICEBREAKERS, GET_JOKES } from '../utils/queries'; 
+import { GET_RANDOM_WOULD_YOU_RATHERS, GET_RANDOM_ICEBREAKERS, GET_JOKES, GET_FACTS } from '../utils/queries'; 
 
 const Results = () => {
     const { selection, addFavorite, removeFavorite } = useIcebreaker();
@@ -14,7 +14,7 @@ const Results = () => {
             "Joke": GET_JOKES,
             "This or That": GET_RANDOM_WOULD_YOU_RATHERS,
             // "Dumb Laws": GET_LAWS,
-            // "Random Facts": GET_ICEBREAKER_QUESTIONS, // Modify this once we have api set up
+            "Useless Facts": GET_FACTS,
             // "Motivational Quotes": GET_ICEBREAKER_QUESTIONS // Modify this once we have api set up
         };
 

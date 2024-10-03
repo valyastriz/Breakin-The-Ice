@@ -14,7 +14,7 @@ const thirdPartyAPISchema = gql`
 
   type Fact {
     id: ID!
-    text: String!
+    content: String!
   }
 
   type Query {
