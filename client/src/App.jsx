@@ -19,7 +19,10 @@ function App() {
   const [themeMode, setThemeMode] = useState('dark');
 
   const toggleTheme = () => {
-    setThemeMode((prevMode) => (prevMode === 'light' ? 'dark' : 'light')); // Toggle logic
+    setThemeMode((prevMode) => {
+      console.log('Previous mode:', prevMode); // Check the previous mode
+      return prevMode === 'dark' ? 'light' : 'dark';
+    });
   };
   const currentTheme = createAppTheme(themeMode); 
 
