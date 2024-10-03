@@ -2,8 +2,7 @@ import { useQuery } from '@apollo/client';
 import { Box, Typography } from '@mui/material';
 import IceBreakerCard from '../components/IceBreakerCard';
 import { useIcebreaker } from '../Context/IcebreakerContext';
-import { GET_RANDOM_WOULD_YOU_RATHERS, GET_RANDOM_ICEBREAKERS, GET_JOKES, GET_FACTS, GET_QUOTES } from '../utils/queries'; 
-import { v4 as uuidv4 } from 'uuid'; // For generating unique ids
+import { GET_RANDOM_WOULD_YOU_RATHERS, GET_RANDOM_ICEBREAKERS, GET_JOKES, GET_FACTS, GET_QUOTES } from '../utils/queries';
 
 const Results = () => {
     const { selection, addFavorite, removeFavorite, favorites } = useIcebreaker();
@@ -18,8 +17,8 @@ const Results = () => {
     };
 
     const { data, loading, error } = useQuery(queryMap[selection?.title], {
-        skip: !selection?.title, 
-        variables: { limit: 10 }, 
+        skip: !selection?.title,
+        variables: { limit: 10 },
     });
 
     const results = data ? data[Object.keys(data)[0]] : [];
@@ -29,12 +28,12 @@ const Results = () => {
 
     return (
         <Box sx={{
-            display: 'flex', 
-            flexGrow: 1, 
-            flexDirection: 'column', 
-            alignItems: 'center', 
-            justifyContent: 'center', 
-            height: '100%', 
+            display: 'flex',
+            flexGrow: 1,
+            flexDirection: 'column',
+            alignItems: 'center',
+            justifyContent: 'center',
+            height: '100%',
             minHeight: '100vh',
             width: '100%'
         }}>
@@ -43,29 +42,25 @@ const Results = () => {
             </Typography>
             <Box sx={{ display: 'flex', flexWrap: 'wrap', justifyContent: 'center' }}>
                 {results.map((result, index) => {
-                    const uniqueId = result._id || uuidv4(); // Generate a unique ID if _id is not available
-                    const isFavorited = favorites.some(fav => fav.uniqueId === uniqueId); // Check if this specific item is favorited
-                    
+                    const itemId = result._id || result.someOtherId; // Use the actual ID of the item
+                    const isFavorited = favorites.some(fav => 
+                        fav.favoriteId === itemId || fav.thirdPartyContent === result.content
+                    );
+
                     return (
                         <IceBreakerCard
-                            key={uniqueId} // Use unique id
+                            key={itemId || index} // Use unique key for the card
                             title={selection?.title}
                             description={result.content}
                             showHeart={true}
                             isFavorited={isFavorited} // Highlight heart if favorited
-                            // Add favorite icebreaker if not already added
                             onFavoriteClick={() => {
                                 if (isFavorited) {
-                                  removeFavorite(uniqueId);
+                                    removeFavorite(result.content || itemId);  // Remove favorite by content or itemId
                                 } else {
-                                  addFavorite({ 
-                                    favoriteId: result._id,  // Pass database id (or null for third-party)
-                                    thirdPartyContent: result.content,  // Content from third-party API (or null)
-                                    title: selection?.title,  // Title of the icebreaker
-                                    description: result.content  // Description/content of the icebreaker
-                                  });
+                                    addFavorite({ ...result, favoriteId: itemId, title: selection?.title });  // Add favorite
                                 }
-                              }}
+                            }}
                         />
                     );
                 })}

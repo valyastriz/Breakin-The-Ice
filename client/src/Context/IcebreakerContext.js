@@ -8,24 +8,32 @@ export const IcebreakerProvider = ({ children }) => {
     const [favorites, setFavorites] = useState([]);   // The list of favorited icebreakers
 
     // Add a favorite icebreaker if it isn't already in the list
-    const addFavorite = item => {
+    const addFavorite = (item) => {
         const newFavorite = {
             ...item,
-            uniqueId: uuidv4(),  // Create a unique ID for each favorite
+            favoriteId: item.favoriteId || uuidv4(),  // Use existing favoriteId or generate a new one
         };
-
-        // Prevent adding duplicates based on the actual item's id or favoriteId
-        if (!favorites.some(favorite => favorite.favoriteId === newFavorite.favoriteId || favorite.thirdPartyContent === newFavorite.thirdPartyContent)) {
-            setFavorites([...favorites, newFavorite]); // Add the new favorite
+    
+        // Check if the item is already favorited
+        const alreadyFavorited = favorites.some(favorite => 
+            (favorite.favoriteId && favorite.favoriteId === newFavorite.favoriteId) || 
+            (favorite.thirdPartyContent && favorite.thirdPartyContent === newFavorite.thirdPartyContent)
+        );
+    
+        if (!alreadyFavorited) {
+            setFavorites([...favorites, newFavorite]);  // Add the new favorite
         } else {
             console.log("Item is already in favorites");
         }
     };
 
-    // Remove a favorite icebreaker by its uniqueId
-    const removeFavorite = uniqueId => {
-        setFavorites(favorites.filter(item => item.uniqueId !== uniqueId));
+    // Remove a favorite icebreaker by its id
+    const removeFavorite = (itemId) => {
+        setFavorites(favorites.filter(favorite => 
+            favorite.favoriteId !== itemId && favorite.thirdPartyContent !== itemId
+        ));
     };
+
 
     return (
         <IcebreakerContext.Provider value={{ selection, setSelection, favorites, addFavorite, removeFavorite }}>

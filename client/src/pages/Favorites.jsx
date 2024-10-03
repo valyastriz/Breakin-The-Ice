@@ -18,7 +18,7 @@ const Favorites = () => {
                 <IceBreakerCard
                   key={favorite.uniqureId || favorite.favoriteId}  // Use the correct key for the favorites
                   title={favorite.title}
-                  description={favorite.description || favorite.thirdPartyContent}
+                  description={favorite.content || favorite.thirdPartyContent}
                   showHeart={true}
                   isFavorited={true}
                   onFavoriteClick={() => removeFavorite(favorite.uniqueId || favorite.favoriteId )}
