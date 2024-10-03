@@ -9,10 +9,11 @@ const lawSchema = gql`
   extend type Query {
     laws: [Law]!
     law(lawId: ID!): Law
+    getRandomLaws(limit: Int!): [Law]  
   }
 
   extend type Mutation {
-    addLaw(description: String!, location: String!): Law
+    addLaw(description: String!): Law
     removeLaw(lawId: ID!): Law
   }
 `;
