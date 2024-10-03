@@ -1,10 +1,7 @@
-// import { useQuery } from '@apollo/client';
 import { Collapse, Box, Button, Typography } from '@mui/material'
 import {useEffect, useState} from 'react';
 import { useTheme } from '@mui/material/styles';
 import { Link as RouterLink } from 'react-router-dom'; 
-
-// import { QUERY_PROFILES } from '../utils/queries';
 
 
 
@@ -19,6 +16,9 @@ const Navbar = ({ navOpen }) => {
     return (
         <Box sx={{
             width: width,
+            minWidth: width,
+            maxWidth: width,
+            flexGrow: 1,
             borderRight: width !== '0%' ? '3px solid lightgrey' : '',
             transition: 'width ease-in-out 0.3s',
             padding: width !== '0%' ? '10px' : '',
