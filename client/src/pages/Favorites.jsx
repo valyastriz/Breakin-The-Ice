@@ -4,22 +4,30 @@ import { useIcebreaker } from '../Context/IcebreakerContext';
 import { useQuery } from '@apollo/client';  
 import { GET_FAVORITES } from '../utils/queries'; 
 import AuthService from '../utils/auth';
+import { useEffect } from 'react';
 
 const Favorites = () => {
     const { removeFavorite } = useIcebreaker();
-    const token = AuthService.getToken();
     const profile = AuthService.getProfile();  // Get the user profile from the token
     const userId = profile?.data?._id || null;  // Correctly extract userId from profile.data
-    console.log('userId:', userId); 
 
-    const { data, loading, error } = useQuery(GET_FAVORITES, {
-      variables: { userId }
+    // Make sure we don't send a request if userId is null
+    const { data, loading, error, refetch } = useQuery(GET_FAVORITES, {
+        variables: { userId },
+        skip: !userId,  // Skip the query if no userId
+        fetchPolicy: 'network-only'  // Ensure fresh data is fetched
     });
 
-    // Debugging: Check the token and profile
-    console.log('Token:', token);
-    console.log('Profile:', profile);
-    console.log('userId:', userId); 
+    // Refetch the data when the component mounts (only when userId is available)
+    useEffect(() => {
+        if (userId) {
+            refetch();
+        }
+    }, [userId, refetch]);
+
+    if (!userId) {
+        return <Typography>Error: You must be logged in to view favorites.</Typography>;
+    }
 
     if (loading) return <Typography>Loading...</Typography>;
     if (error) return <Typography>Error: {error.message}</Typography>;
