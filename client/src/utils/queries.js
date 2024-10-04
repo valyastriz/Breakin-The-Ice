@@ -21,11 +21,10 @@ export const GET_USER = gql`
 `;
 
 export const GET_LAWS = gql`
-  query GetLaws {
-    laws {
+  query getRandomLaws($limit: Int!) {
+    getRandomLaws(limit: $limit) {
       _id
       content
-      __typename
     }
   }
 `;
