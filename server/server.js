@@ -26,6 +26,20 @@ const startApolloServer = async () => {
   app.use(express.urlencoded({ extended: true }));
   app.use(express.json());
 
+  app.post('/create-payment-intent', async (req, res) => {
+    const { amount } = req.body; // Amount should be in cents
+
+    try {
+      const paymentIntent = await stripe.paymentIntents.create({
+        amount,
+        currency: 'usd',
+      });
+      res.json({ clientSecret: paymentIntent.client_secret });
+    } catch (error) {
+      console.error(error);
+      res.status(400).json({ error: error.message });
+    }
+  });
   // Apply the Apollo GraphQL middleware and set the path to /graphql
   server.applyMiddleware({ app, path: '/graphql' });
 
