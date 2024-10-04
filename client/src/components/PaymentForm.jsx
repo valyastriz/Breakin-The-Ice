@@ -40,3 +40,5 @@ const PaymentForm = ({ onPaymentSucces }) => {
         </form>
     );
 };
+
+export default PaymentForm;
