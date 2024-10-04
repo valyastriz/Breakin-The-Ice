@@ -1,11 +1,13 @@
-import { useQuery } from '@apollo/client';
+import { useQuery, useMutation } from '@apollo/client';
 import { Box, Typography } from '@mui/material';
 import IceBreakerCard from '../components/IceBreakerCard';
 import { useIcebreaker } from '../Context/IcebreakerContext';
 import { GET_RANDOM_WOULD_YOU_RATHERS, GET_RANDOM_ICEBREAKERS, GET_JOKES, GET_FACTS, GET_QUOTES, GET_LAWS } from '../utils/queries';
+import { ADD_FAVORITE } from '../utils/mutations';  // Import the mutation
 
 const Results = () => {
-    const { selection, addFavorite, removeFavorite, favorites } = useIcebreaker();
+    const { selection, removeFavorite, favorites, addFavorite } = useIcebreaker();
+    const [addFavoriteMutation] = useMutation(ADD_FAVORITE);  // Initialize the mutation
 
     // Map titles to GraphQL queries
     const queryMap = {
@@ -26,6 +28,32 @@ const Results = () => {
 
     if (loading) return <Typography>Loading...</Typography>;
     if (error) return <Typography>Error: {error.message}</Typography>;
+
+    const handleFavoriteClick = (result, isFavorited) => {
+        const uniqueId = result._id || result.someOtherId;
+
+        if (isFavorited) {
+            removeFavorite(result.content || uniqueId);  // Remove from local context
+            // Add remove favorite mutation if you have one
+        } else {
+            addFavoriteMutation({
+                variables: {
+                    favoriteId: uniqueId,
+                    thirdPartyContent: result.content,
+                    title: selection?.title,
+                    description: result.content
+                },
+            })
+            .then(response => {
+                console.log('Favorite added:', response.data);
+                // Optionally, update the local state as well if needed
+                addFavorite({ favoriteId: uniqueId, thirdPartyContent: result.content, title: selection?.title });
+            })
+            .catch(error => {
+                console.error('Error adding favorite:', error);
+            });
+        }
+    };
 
     return (
         <Box sx={{
@@ -53,13 +81,7 @@ const Results = () => {
                             description={result.content}
                             showHeart={true}
                             isFavorited={isFavorited} // Toggle heart based on whether it's favorited
-                            onFavoriteClick={() => {
-                                if (isFavorited) {
-                                    removeFavorite(result.content || uniqueId);  // Remove favorite by content or uniqueId
-                                } else {
-                                    addFavorite({ ...result, favoriteId: uniqueId, title: selection?.title });  // Add favorite
-                                }
-                            }}
+                            onFavoriteClick={() => handleFavoriteClick(result, isFavorited)}  // Call handleFavoriteClick
                         />
                     );
                 })}

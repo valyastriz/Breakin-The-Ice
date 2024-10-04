@@ -31,6 +31,13 @@ const userSchema = gql`
     me: User  # Fetch the logged-in user's data
   }
 
+  extend type Query {
+    users: [User]!
+    user(userId: ID!): User
+    me: User  # Fetch the logged-in user's data
+    favorites(userId: ID!): [Favorite]  # Add the favorites query
+  }
+  
   # Extend the Mutation type for adding users, login, and handling favorites
   extend type Mutation {
     addUser(username: String!, email: String!, password: String!): Auth

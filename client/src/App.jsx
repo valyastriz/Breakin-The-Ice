@@ -25,6 +25,7 @@ function App() {
     });
   };
   const currentTheme = createAppTheme(themeMode); 
+  console.log('Current theme mode:', themeMode); 
 
 
   return (

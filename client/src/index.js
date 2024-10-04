@@ -1,15 +1,35 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
-import { ApolloClient, InMemoryCache, ApolloProvider } from '@apollo/client';
+import { ApolloClient, InMemoryCache, ApolloProvider, createHttpLink } from '@apollo/client';
+import { setContext } from '@apollo/client/link/context';
 import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 import { ThemeProvider, CssBaseline } from '@mui/material';
 import theme from './Context/theme.js';
 import { IcebreakerProvider} from './Context/IcebreakerContext';
+import AuthService from './utils/auth';  // Import your AuthService
 
-const client = new ApolloClient({
+// Create HTTP link to your GraphQL server
+const httpLink = createHttpLink({
   uri: 'http://localhost:3001/graphql',
+});
+
+// Middleware to include the token in the headers
+const authLink = setContext((_, { headers }) => {
+  // Get the authentication token from localStorage or AuthService
+  const token = AuthService.getToken();
+  return {
+    headers: {
+      ...headers,
+      authorization: token ? `Bearer ${token}` : '',
+    },
+  };
+});
+
+// Apollo client setup with authLink to include the token in requests
+const client = new ApolloClient({
+  link: authLink.concat(httpLink),
   cache: new InMemoryCache(),
 });
 
