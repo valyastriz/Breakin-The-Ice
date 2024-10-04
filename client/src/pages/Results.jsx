@@ -1,10 +1,8 @@
-import { useQuery, useMutation } from '@apollo/client';
+import { useQuery } from '@apollo/client';
 import { Box, Typography } from '@mui/material';
 import IceBreakerCard from '../components/IceBreakerCard';
 import { useIcebreaker } from '../Context/IcebreakerContext';
-import { GET_RANDOM_WOULD_YOU_RATHERS, GET_RANDOM_ICEBREAKERS, GET_JOKES, GET_FACTS, GET_QUOTES, GET_LAWS, GET_FAVORITES } from '../utils/queries';
-import { ADD_FAVORITE } from '../utils/mutations';  // Import the mutation
-import AuthService from '../utils/auth';
+import { GET_RANDOM_WOULD_YOU_RATHERS, GET_RANDOM_ICEBREAKERS, GET_JOKES, GET_FACTS, GET_QUOTES, GET_LAWS } from '../utils/queries';
 
 const Results = () => {
     const { selection, removeFavorite, favorites, addFavorite } = useIcebreaker();
@@ -38,8 +36,20 @@ const Results = () => {
 
     const results = data ? data[Object.keys(data)[0]] : [];
 
+    
+    const navigate = useNavigate();
+
+    const handleHomeClick = () => {
+        navigate('/'); // Navigate to the homepage
+    };
+
     if (loading) return <Typography>Loading...</Typography>;
     if (error) return <Typography>Error: {error.message}</Typography>;
+
+    const handleButtonClick = () => {
+        console.log("Button clicked!"); // Replace with your desired action
+    };
+
 
     const handleFavoriteClick = (result, isFavorited) => {
         if (!AuthService.loggedIn()) {
@@ -89,6 +99,17 @@ const Results = () => {
             <Typography variant='h3' sx={{ textAlign: 'center', width: '80%' }}>
                 {selection ? `${selection.title}` : "No selection made"}
             </Typography>
+
+ 
+            <Button 
+                variant="contained" 
+                onClick={handleHomeClick} 
+                sx={{ margin: 2, 
+                    backgroundColor: 'primary.main', color: '#fff' }} 
+            >
+                Return to homepage
+            </Button>
+
             <Box sx={{ display: 'flex', flexWrap: 'wrap', justifyContent: 'center' }}>
                 {results.map((result, index) => {
                     const uniqueId = result._id || result.someOtherId || `custom-id-${index}`;  // Ensure unique id for each item
@@ -106,6 +127,14 @@ const Results = () => {
                     );
                 })}
             </Box>
+            <Button 
+                variant="contained" 
+                onClick={handleButtonClick} 
+                sx={{ margin: 2, 
+                    backgroundColor: 'primary.main', color: '#fff' }} 
+            >
+                Search for more!
+            </Button>
         </Box>
     );
 };
