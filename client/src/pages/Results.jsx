@@ -1,23 +1,19 @@
-import { useQuery } from '@apollo/client';
-import { Box, Typography } from '@mui/material';
+import { useQuery, useMutation } from '@apollo/client';
+import { Box, Typography, Button } from '@mui/material';
 import IceBreakerCard from '../components/IceBreakerCard';
 import { useIcebreaker } from '../Context/IcebreakerContext';
-import { GET_RANDOM_WOULD_YOU_RATHERS, GET_RANDOM_ICEBREAKERS, GET_JOKES, GET_FACTS, GET_QUOTES, GET_LAWS } from '../utils/queries';
+import { GET_RANDOM_WOULD_YOU_RATHERS, GET_RANDOM_ICEBREAKERS, GET_JOKES, GET_FACTS, GET_QUOTES, GET_LAWS, GET_FAVORITES } from '../utils/queries';
+import { ADD_FAVORITE } from '../utils/mutations';  // Import the mutation
+import AuthService from '../utils/auth';
+import React from 'react';
+import { useNavigate } from 'react-router-dom';
 
 const Results = () => {
     const { selection, removeFavorite, favorites, addFavorite } = useIcebreaker();
     const profile = AuthService.loggedIn() ? AuthService.getProfile() : null;
     const userId = profile?.data?._id || null;  // Only get userId if logged in
 
-    const [addFavoriteMutation] = useMutation(ADD_FAVORITE, {
-        refetchQueries: [
-          {
-            query: GET_FAVORITES,
-            variables: { userId }, // Refetch after the mutation, only if userId exists
-            skip: !userId,  // Skip the refetch if the user isn't logged in
-          },
-        ],
-    });
+    const [addFavoriteMutation] = useMutation(ADD_FAVORITE);
 
     // Map titles to GraphQL queries
     const queryMap = {
@@ -46,11 +42,6 @@ const Results = () => {
     if (loading) return <Typography>Loading...</Typography>;
     if (error) return <Typography>Error: {error.message}</Typography>;
 
-    const handleButtonClick = () => {
-        console.log("Button clicked!"); // Replace with your desired action
-    };
-
-
     const handleFavoriteClick = (result, isFavorited) => {
         if (!AuthService.loggedIn()) {
             alert("You must be logged in to add or remove favorites.");  // Notify non-logged-in users
@@ -70,6 +61,14 @@ const Results = () => {
                     title: selection?.title,
                     description: result.content,
                 },
+                ...(userId && { // Only refetch if the user is logged in
+                    refetchQueries: [
+                        {
+                            query: GET_FAVORITES,
+                            variables: { userId },
+                        },
+                    ]
+                }),
             })
             .then(response => {
                 console.log('Favorite added successfully:', response.data);
@@ -84,6 +83,11 @@ const Results = () => {
             });
         }
     };
+
+    const handleButtonClick = () => {
+        console.log("Button clicked!"); // Replace with your desired action
+    };
+
 
     return (
         <Box sx={{
