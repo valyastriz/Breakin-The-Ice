@@ -2,7 +2,7 @@ import React from 'react';
 import { CardElement, useStripe, useElements } from '@stripe/react-stripe-js';
 import { Button, Box } from '@mui/material';
 
-const PaymentForm = ({ onPaymentSucces }) => {
+const PaymentForm = ({ onPaymentSucces, coffeePrice }) => {
     const stripe = useStripe();
     const elements = useElements();
 
@@ -33,7 +33,12 @@ const PaymentForm = ({ onPaymentSucces }) => {
         <form onSubmit={handleSubmit}>
             <CardElement />
             <Box mt={2}>
-                <Button type="submit" variant="contained" color="primary" disabled={!stripe}>
+                <Button 
+                    type="submit" 
+                    variant="contained" 
+                    color="primary" 
+                    disabled={!stripe || coffeePrice <= 0}
+                >
                     Buy Coffee for ${coffeePrice / 100}
                 </Button>
             </Box>
