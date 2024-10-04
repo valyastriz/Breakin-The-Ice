@@ -8,7 +8,6 @@ class AuthService {
 
   getToken() {
     const token = localStorage.getItem('token');
-    console.log('Retrieved token:', token); // Add this log for debugging
     return token;
 }
 

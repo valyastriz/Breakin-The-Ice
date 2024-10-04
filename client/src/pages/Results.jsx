@@ -8,14 +8,18 @@ import AuthService from '../utils/auth';
 
 const Results = () => {
     const { selection, removeFavorite, favorites, addFavorite } = useIcebreaker();
+    const profile = AuthService.loggedIn() ? AuthService.getProfile() : null;
+    const userId = profile?.data?._id || null;  // Only get userId if logged in
+
     const [addFavoriteMutation] = useMutation(ADD_FAVORITE, {
         refetchQueries: [
           {
             query: GET_FAVORITES,
-            variables: { userId: AuthService.getProfile()._id }, // Refetch after the mutation
+            variables: { userId }, // Refetch after the mutation, only if userId exists
+            skip: !userId,  // Skip the refetch if the user isn't logged in
           },
         ],
-      });
+    });
 
     // Map titles to GraphQL queries
     const queryMap = {
@@ -38,33 +42,38 @@ const Results = () => {
     if (error) return <Typography>Error: {error.message}</Typography>;
 
     const handleFavoriteClick = (result, isFavorited) => {
-        const uniqueId = result._id || result.someOtherId;
-      
-        if (isFavorited) {
-          removeFavorite(result.content || uniqueId);
-          console.log("Removing favorite:", uniqueId);
-        } else {
-          addFavoriteMutation({
-            variables: {
-              favoriteId: uniqueId,
-              thirdPartyContent: result.content,
-              title: selection?.title,
-              description: result.content,
-            },
-          })
-          .then(response => {
-            console.log('Favorite added successfully:', response.data);
-            addFavorite({
-              favoriteId: uniqueId,
-              thirdPartyContent: result.content,
-              title: selection?.title,
-            });
-          })
-          .catch(error => {
-            console.error('Error adding favorite:', error);
-          });
+        if (!AuthService.loggedIn()) {
+            alert("You must be logged in to add or remove favorites.");  // Notify non-logged-in users
+            return;
         }
-      };
+
+        const uniqueId = result._id || result.someOtherId || result.id;
+
+        if (isFavorited) {
+            removeFavorite(result.content || uniqueId);
+            console.log("Removing favorite:", uniqueId);
+        } else {
+            addFavoriteMutation({
+                variables: {
+                    favoriteId: uniqueId,
+                    thirdPartyContent: result.content,
+                    title: selection?.title,
+                    description: result.content,
+                },
+            })
+            .then(response => {
+                console.log('Favorite added successfully:', response.data);
+                addFavorite({
+                    favoriteId: uniqueId,
+                    thirdPartyContent: result.content,
+                    title: selection?.title,
+                });
+            })
+            .catch(error => {
+                console.error('Error adding favorite:', error);
+            });
+        }
+    };
 
     return (
         <Box sx={{

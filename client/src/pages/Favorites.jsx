@@ -1,38 +1,51 @@
 import { Box, Typography } from '@mui/material';
 import IceBreakerCard from '../components/IceBreakerCard';
 import { useIcebreaker } from '../Context/IcebreakerContext';
-import { useQuery } from '@apollo/client';  
+import { useQuery, useMutation } from '@apollo/client';  
 import { GET_FAVORITES } from '../utils/queries'; 
+import { REMOVE_FAVORITE } from '../utils/mutations'; // Import the remove mutation
 import AuthService from '../utils/auth';
-import { useEffect } from 'react';
 
 const Favorites = () => {
     const { removeFavorite } = useIcebreaker();
-    const profile = AuthService.getProfile();  // Get the user profile from the token
-    const userId = profile?.data?._id || null;  // Correctly extract userId from profile.data
+    const token = AuthService.getToken();
+    const profile = AuthService.getProfile();  
+    const userId = profile?.data?._id || null;  
 
-    // Make sure we don't send a request if userId is null
-    const { data, loading, error, refetch } = useQuery(GET_FAVORITES, {
-        variables: { userId },
-        skip: !userId,  // Skip the query if no userId
-        fetchPolicy: 'network-only'  // Ensure fresh data is fetched
+    const { data, loading, error } = useQuery(GET_FAVORITES, {
+      variables: { userId }
     });
 
-    // Refetch the data when the component mounts (only when userId is available)
-    useEffect(() => {
-        if (userId) {
-            refetch();
-        }
-    }, [userId, refetch]);
+    const [removeFavoriteMutation, setFavorites] = useMutation(REMOVE_FAVORITE, {
+        refetchQueries: [
+            { query: GET_FAVORITES, variables: { userId } } // Refetch favorites after removing
+        ]
+    });
 
-    if (!userId) {
-        return <Typography>Error: You must be logged in to view favorites.</Typography>;
-    }
+    // Debugging: Check the token and profile
+    console.log('Token:', token);
+    console.log('Profile:', profile);
+    console.log('userId:', userId);
 
     if (loading) return <Typography>Loading...</Typography>;
     if (error) return <Typography>Error: {error.message}</Typography>;
 
     const favorites = data?.favorites || [];
+
+    const handleRemoveFavorite = (favoriteId) => {
+        removeFavoriteMutation({
+            variables: { favoriteId }
+        })
+        .then(response => {
+            console.log('Favorite removed:', response.data);
+            removeFavorite(favoriteId);  // Update local state after removing
+        // This will avoid the need for refetching every time
+        setFavorites(prevFavorites => prevFavorites.filter(fav => fav.favoriteId !== favoriteId));
+        })
+        .catch(error => {
+            console.error('Error removing favorite:', error);
+        });
+    };
 
     return (
         <Box sx={{ 
@@ -56,7 +69,7 @@ const Favorites = () => {
                   description={favorite.description || favorite.thirdPartyContent}
                   showHeart={true}
                   isFavorited={true}
-                  onFavoriteClick={() => removeFavorite(favorite.favoriteId)}
+                  onFavoriteClick={() => handleRemoveFavorite(favorite.favoriteId)} // Handle remove click
                 />
             ))}
           </Box>

@@ -20,7 +20,7 @@ const userSchema = new Schema({
   savedFavorites: [
     {
       favoriteId: {
-        type: Schema.Types.ObjectId, 
+        type: String, 
         ref: 'Favorite', // For database-stored icebreakers
       },
       thirdPartyContent: String, // For third-party API content
