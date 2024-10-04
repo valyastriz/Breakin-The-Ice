@@ -16,6 +16,13 @@ const resolvers = {
       }
       throw new AuthenticationError('Not logged in');
     },
+    favorites: async (parent, { userId }) => {
+      const user = await User.findOne({ _id: userId });
+      if (!user) {
+        throw new Error('User not found');
+      }
+      return user.savedFavorites;  // Return the user's savedFavorites
+    },
   },
   Mutation: {
     addUser: async (parent, { username, email, password }) => {
@@ -37,12 +44,9 @@ const resolvers = {
     },
     addFavorite: async (parent, { favoriteId, thirdPartyContent, title, description }, context) => {
       if (context.user) {
-        // Debugging: Log the favoriteId to see if it exists and is correct
-        console.log("favoriteId:", favoriteId);
-        
         return User.findOneAndUpdate(
           { _id: context.user._id },
-          { $addToSet: { savedFavorites: { favoriteId, thirdPartyContent, title, description } } },
+          { $addToSet: { savedFavorites: { favoriteId, thirdPartyContent, title, description } } }, // Add to set to prevent duplicates
           { new: true, runValidators: true }
         );
       }

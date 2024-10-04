@@ -42,8 +42,10 @@ export const GET_LAW = gql`
 export const GET_FAVORITES = gql`
   query GetFavorites($userId: ID!) {
     favorites(userId: $userId) {
-      _id
+      favoriteId
+      title
       description
+      thirdPartyContent
     }
   }
 `;

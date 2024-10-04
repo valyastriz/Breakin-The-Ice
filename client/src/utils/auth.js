@@ -2,8 +2,14 @@ import { jwtDecode } from 'jwt-decode';
 
 class AuthService {
   getProfile() {
-    return jwtDecode(this.getToken());
+    const token = this.getToken();  // Fetch the token from localStorage
+    return token ? jwtDecode(token) : null;  // Decode and return the user profile
   }
+
+  getToken() {
+    const token = localStorage.getItem('token');
+    return token;
+}
 
   loggedIn() {
     const token = this.getToken();
@@ -13,10 +19,6 @@ class AuthService {
   isTokenExpired(token) {
     const decoded = jwtDecode(token);
     return decoded.exp < Date.now() / 1000;
-  }
-
-  getToken() {
-    return localStorage.getItem('token');
   }
 
   login(idToken) {
@@ -30,4 +32,7 @@ class AuthService {
   }
 }
 
-export default new AuthService();
+// Assign the instance to a variable before exporting
+const authServiceInstance = new AuthService();
+
+export default authServiceInstance;

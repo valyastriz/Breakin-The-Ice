@@ -13,22 +13,38 @@ export const ADD_USER = gql`
   }
 `;
 
+// export const ADD_FAVORITE = gql`
+//   mutation AddFavorite($userId: ID!, $favorite: String!) {
+//     addFavorite(userId: $userId, favorite: $favorite) {
+//       _id
+//       name
+//       favorites
+//     }
+//   }
+// `;
+
 export const ADD_FAVORITE = gql`
-  mutation AddFavorite($userId: ID!, $favorite: String!) {
-    addFavorite(userId: $userId, favorite: $favorite) {
+  mutation AddFavorite($favoriteId: ID, $thirdPartyContent: String, $title: String!, $description: String!) {
+    addFavorite(favoriteId: $favoriteId, thirdPartyContent: $thirdPartyContent, title: $title, description: $description) {
       _id
-      name
-      favorites
+      savedFavorites {
+        favoriteId
+        title
+        description
+      }
     }
   }
 `;
 
 export const REMOVE_FAVORITE = gql`
-  mutation RemoveFavorite($userId: ID!, $favorite: String!) {
-    removeFavorite(userId: $userId, favorite: $favorite) {
+  mutation RemoveFavorite($favoriteId: ID!) {
+    removeFavorite(favoriteId: $favoriteId) {
       _id
-      name
-      favorites
+      savedFavorites {
+        favoriteId
+        title
+        description
+      }
     }
   }
 `;
