@@ -4,9 +4,12 @@ import { Box, Typography, Button } from '@mui/material';
 import IceBreakerCard from '../components/IceBreakerCard';
 import { useIcebreaker } from '../Context/IcebreakerContext';
 import { useNavigate } from 'react-router-dom';
+import { useLocation } from 'react-router-dom';
 import { GET_RANDOM_WOULD_YOU_RATHERS, GET_RANDOM_ICEBREAKERS, GET_JOKES, GET_FACTS, GET_QUOTES, GET_LAWS } from '../utils/queries';
 
+
 const Results = () => {
+    const location = useLocation(); // Get the current location
     const { selection, addFavorite, removeFavorite, favorites } = useIcebreaker();
 
     // Map titles to GraphQL queries
@@ -26,7 +29,7 @@ const Results = () => {
 
     const results = data ? data[Object.keys(data)[0]] : [];
 
-    
+
     const navigate = useNavigate();
 
     const handleHomeClick = () => {
@@ -36,13 +39,13 @@ const Results = () => {
     if (loading) return <Typography>Loading...</Typography>;
     if (error) return <Typography>Error: {error.message}</Typography>;
 
-    const handleButtonClick = () => {
-        console.log("Button clicked!"); // Replace with your desired action
+    const handleRefreshClick = () => {
+        navigate(location.pathname); // Navigate to the current path to refresh
     };
 
 
     return (
-        <Box sx={{
+        <Box key={selection?.title || 'default-key'} sx={{
             display: 'flex',
             flexGrow: 1,
             flexDirection: 'column',
@@ -91,7 +94,7 @@ const Results = () => {
             </Box>
             <Button 
                 variant="contained" 
-                onClick={handleButtonClick} 
+                onClick={handleRefreshClick} 
                 sx={{ margin: 2, 
                     backgroundColor: 'primary.main', color: '#fff' }} 
             >
