@@ -1,16 +1,20 @@
-import React from 'react';
-import { useQuery } from '@apollo/client';
+import { useQuery, useMutation } from '@apollo/client';
 import { Box, Typography, Button } from '@mui/material';
 import IceBreakerCard from '../components/IceBreakerCard';
 import { useIcebreaker } from '../Context/IcebreakerContext';
+import { GET_RANDOM_WOULD_YOU_RATHERS, GET_RANDOM_ICEBREAKERS, GET_JOKES, GET_FACTS, GET_QUOTES, GET_LAWS, GET_FAVORITES } from '../utils/queries';
+import { ADD_FAVORITE } from '../utils/mutations';  // Import the mutation
+import AuthService from '../utils/auth';
+import React from 'react';
 import { useNavigate } from 'react-router-dom';
-import { useLocation } from 'react-router-dom';
-import { GET_RANDOM_WOULD_YOU_RATHERS, GET_RANDOM_ICEBREAKERS, GET_JOKES, GET_FACTS, GET_QUOTES, GET_LAWS } from '../utils/queries';
 
 
 const Results = () => {
-    const location = useLocation(); // Get the current location
-    const { selection, addFavorite, removeFavorite, favorites } = useIcebreaker();
+    const { selection, removeFavorite, favorites, addFavorite } = useIcebreaker();
+    const profile = AuthService.loggedIn() ? AuthService.getProfile() : null;
+    const userId = profile?.data?._id || null;  // Only get userId if logged in
+
+    const [addFavoriteMutation] = useMutation(ADD_FAVORITE);
 
     // Map titles to GraphQL queries
     const queryMap = {
@@ -39,8 +43,50 @@ const Results = () => {
     if (loading) return <Typography>Loading...</Typography>;
     if (error) return <Typography>Error: {error.message}</Typography>;
 
-    const handleRefreshClick = () => {
-        navigate(location.pathname); // Navigate to the current path to refresh
+    const handleFavoriteClick = (result, isFavorited) => {
+        if (!AuthService.loggedIn()) {
+            alert("You must be logged in to add or remove favorites.");  // Notify non-logged-in users
+            return;
+        }
+
+        const uniqueId = result._id || result.someOtherId || result.id;
+
+        if (isFavorited) {
+            removeFavorite(result.content || uniqueId);
+            console.log("Removing favorite:", uniqueId);
+        } else {
+            addFavoriteMutation({
+                variables: {
+                    favoriteId: uniqueId,
+                    thirdPartyContent: result.content,
+                    title: selection?.title,
+                    description: result.content,
+                },
+                ...(userId && { // Only refetch if the user is logged in
+                    refetchQueries: [
+                        {
+                            query: GET_FAVORITES,
+                            variables: { userId },
+                        },
+                    ]
+                }),
+            })
+            .then(response => {
+                console.log('Favorite added successfully:', response.data);
+                addFavorite({
+                    favoriteId: uniqueId,
+                    thirdPartyContent: result.content,
+                    title: selection?.title,
+                });
+            })
+            .catch(error => {
+                console.error('Error adding favorite:', error);
+            });
+        }
+    };
+
+    const handleButtonClick = () => {
+        console.log("Button clicked!"); // Replace with your desired action
     };
 
 
@@ -81,13 +127,7 @@ const Results = () => {
                             description={result.content}
                             showHeart={true}
                             isFavorited={isFavorited} // Toggle heart based on whether it's favorited
-                            onFavoriteClick={() => {
-                                if (isFavorited) {
-                                    removeFavorite(result.content || uniqueId);  // Remove favorite by content or uniqueId
-                                } else {
-                                    addFavorite({ ...result, favoriteId: uniqueId, title: selection?.title });  // Add favorite
-                                }
-                            }}
+                            onFavoriteClick={() => handleFavoriteClick(result, isFavorited)}  // Call handleFavoriteClick
                         />
                     );
                 })}

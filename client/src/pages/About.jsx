@@ -4,7 +4,6 @@ import { useTheme } from '@mui/material/styles';
 
 const About = () => {
   const theme = useTheme(); // Access the theme
-
  
   return (
     <Container sx={{ padding: 4, backgroundColor: theme.palette.background.paper, borderRadius: 2, boxShadow: 2, minheight: '100%', height: '100vh' }}>
