@@ -5,8 +5,8 @@ import { useIcebreaker } from '../Context/IcebreakerContext';
 import { GET_RANDOM_WOULD_YOU_RATHERS, GET_RANDOM_ICEBREAKERS, GET_JOKES, GET_FACTS, GET_QUOTES, GET_LAWS, GET_FAVORITES } from '../utils/queries';
 import { ADD_FAVORITE } from '../utils/mutations';  // Import the mutation
 import AuthService from '../utils/auth';
-import React from 'react';
-import { useNavigate } from 'react-router-dom';
+import React, { useEffect } from 'react';
+import { useNavigate, useLocation } from 'react-router-dom';
 
 const Results = () => {
     const { selection, removeFavorite, favorites, addFavorite } = useIcebreaker();
@@ -25,7 +25,11 @@ const Results = () => {
         "Dumb Laws": GET_LAWS,
     };
 
-    const { data, loading, error } = useQuery(queryMap[selection?.title], {
+    const location = useLocation();
+    const params = new URLSearchParams(location.search);
+    const title = params.get('title'); // Get the title from the URL parameters
+
+    const { data, loading, error, refetch } = useQuery(queryMap[selection?.title], {
         skip: !selection?.title,
         variables: { limit: 10 },
     });
@@ -35,8 +39,17 @@ const Results = () => {
     
     const navigate = useNavigate();
 
+    useEffect(() => {
+        if (title) {
+            refetch(); // Refetch the data whenever selection changes
+        }
+    }, [title, refetch]);
+
     const handleHomeClick = () => {
         navigate('/'); // Navigate to the homepage
+    };
+    const handleRefreshClick = () => {
+        refetch();
     };
 
     if (loading) return <Typography>Loading...</Typography>;
@@ -84,9 +97,9 @@ const Results = () => {
         }
     };
 
-    const handleButtonClick = () => {
-        console.log("Button clicked!"); // Replace with your desired action
-    };
+    // const handleButtonClick = () => {
+    //     console.log("Button clicked!"); // Replace with your desired action
+    // };
 
 
     return (
@@ -133,7 +146,7 @@ const Results = () => {
             </Box>
             <Button 
                 variant="contained" 
-                onClick={handleButtonClick} 
+                onClick={handleRefreshClick} 
                 sx={{ margin: 2, 
                     backgroundColor: 'primary.main', color: '#fff' }} 
             >
