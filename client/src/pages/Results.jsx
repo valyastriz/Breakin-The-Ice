@@ -8,7 +8,6 @@ import AuthService from '../utils/auth';
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
 
-
 const Results = () => {
     const { selection, removeFavorite, favorites, addFavorite } = useIcebreaker();
     const profile = AuthService.loggedIn() ? AuthService.getProfile() : null;
@@ -33,7 +32,7 @@ const Results = () => {
 
     const results = data ? data[Object.keys(data)[0]] : [];
 
-
+    
     const navigate = useNavigate();
 
     const handleHomeClick = () => {
@@ -91,7 +90,7 @@ const Results = () => {
 
 
     return (
-        <Box key={selection?.title || 'default-key'} sx={{
+        <Box sx={{
             display: 'flex',
             flexGrow: 1,
             flexDirection: 'column',
@@ -134,7 +133,7 @@ const Results = () => {
             </Box>
             <Button 
                 variant="contained" 
-                onClick={handleRefreshClick} 
+                onClick={handleButtonClick} 
                 sx={{ margin: 2, 
                     backgroundColor: 'primary.main', color: '#fff' }} 
             >
