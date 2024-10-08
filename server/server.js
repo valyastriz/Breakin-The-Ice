@@ -2,7 +2,7 @@ const express = require('express');
 require('dotenv').config();
 const { ApolloServer } = require('apollo-server-express');
 const path = require('path');
-
+const stripe = require('stripe')('sk_test_51Q60NOJxeDwsAPSIVSDxy1MBisduJOsOfi3ZYApaSQGrvXO8lcXpXZ1n7NnyPlsnIIbw0DfIa2jSWa5g9nugMHAh003dblXXal');
 const typeDefs = require('./schemas');
 const resolvers = require('./resolvers');
 const db = require('./config/connection');
@@ -39,6 +39,27 @@ const startApolloServer = async () => {
       console.error(error);
       res.status(400).json({ error: error.message });
     }
+  });
+
+  app.get('/hello', (req, res) => {
+    res.json('Hello world')
+  })
+
+  const YOUR_DOMAIN = 'http://localhost:3001'; 
+  app.post('/create-checkout-session', async (req, res) => {
+    const session = await stripe.checkout.sessions.create({
+      line_items: [
+        {
+          price: 'price_1Q7QnCJxeDwsAPSISGggPBvS',
+          quantity: 1,
+        },
+      ],
+      mode: 'payment',
+      success_url: `${YOUR_DOMAIN}?success=true`,
+      cancel_url: `${YOUR_DOMAIN}?canceled=true`,
+    });
+
+    res.redirect(303, session.url);
   });
   // Apply the Apollo GraphQL middleware and set the path to /graphql
   server.applyMiddleware({ app, path: '/graphql' });

@@ -1,8 +1,8 @@
 // import { useQuery } from '@apollo/client';
 import React, { useState } from 'react'
 import { Box, Typography } from '@mui/material'
-import { Elements } from '@stripe/react-stripe-js';
-import { loadStripe } from '@stripe/stripe-js';
+//import { Elements } from '@stripe/react-stripe-js';
+//import { loadStripe } from '@stripe/stripe-js';
 import PaymentForm from '../components/PaymentForm';
 import CoffeeSelection from '../components/CoffeeSelection';
 // import { QUERY_PROFILES } from '../utils/queries';
@@ -15,8 +15,9 @@ const coffeeOptions = [
   { id: 'cappuccino', name: 'Cappuccino', price: 350 },
 ];
 
-const stripePromise = loadStripe(process.env.REACT_APP_STRIPE_PUBLIC_KEY);
-console.log(process.env.REACT_APP_STRIPE_PUBLIC_KEY);
+//const stripePromise = loadStripe(process.env.REACT_APP_STRIPE_SECRET_KEY);
+//console.log('Stripe Secret Key:', process.env.REACT_APP_STRIPE_SECRET_KEY);
+
 
 const BuyUsACoffee = () => {
   const [selectedCoffee, setSelectedCoffee] = useState(null);
@@ -40,14 +41,14 @@ const BuyUsACoffee = () => {
 //   const profiles = data?.profiles || [];
 
   return (
-    <Elements stripe={stripePromise}>
+   // <Elements stripe={stripePromise}>
       <Box sx={{display:'flex', flexGrow: 1, flexDirection: 'column', alignItems: 'center', justifyContent: 'center', minheight: '100%',
         height: '100vh', width: '100%'}}>
           <Typography variant='h3' sx={{ textAlign: 'center', width: '80%' }}>Buy Us A Coffee!</Typography>
           <CoffeeSelection selectedCoffee={selectedCoffee} setSelectedCoffee={handleCoffeeSelect}/>
           <PaymentForm onPaymentSuccess={handlePaymentSuccess} coffeePrice={coffeePrice} />
       </Box>
-    </Elements>
+    //</Elements>
   );
 };
 
