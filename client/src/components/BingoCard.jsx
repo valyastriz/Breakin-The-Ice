@@ -7,7 +7,7 @@ const BingoCard = ({ title, description, onClick }) => {
   const theme = useTheme();
 
   return (
-      <Card sx={{ minWidth: 275, maxWidth: 300, margin: 2, backgroundColor: theme.palette.background.paper }}>
+      <Card sx={{ minWidth: 275, maxWidth: 300, margin: 2, backgroundColor: theme.background.highlight }}>
           <CardActionArea onClick={onClick}>
               <CardContent>
                   <Typography variant="h5" component="div">

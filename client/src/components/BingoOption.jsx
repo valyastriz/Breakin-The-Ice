@@ -7,9 +7,9 @@ const BingoOption = () => {
     const { setSelection } = useBingo();  // Context hook to set selected option
     const navigate = useNavigate();  // Hook for navigation
 
-    const bingoOption = [
-        { id: 1, title: "BINGO", description: "A game to get to know those around you." },
-    ];
+    const bingoOption = 
+        { id: 1, title: "BINGO", description: "A game to get to know those around you." }
+    ;
 
     // Function to handle selection
     const handleSelect = () => {
@@ -18,16 +18,14 @@ const BingoOption = () => {
     };
 
     return (
-        <Box sx={{ display: 'flex', flexWrap: 'wrap', justifyContent: 'center', padding: 2 }}>
-            {bingoOption.map(option => (
-                <BingoCard
-                    key={bingoOption.id}
-                    title={bingoOption.title}
-                    description={bingoOption.description}
-                    onClick={handleSelect}
-                />
-            ))}
-        </Box>
+      <Box sx={{ display: 'flex', justifyContent: 'center', padding: 2 }}>
+      <BingoCard
+          key={bingoOption.id} // Using bingoOption.id directly
+          title={bingoOption.title}
+          description={bingoOption.description}
+          onClick={handleSelect} // Pass the function directly
+      />
+  </Box>
     );
 };
 
