@@ -33,7 +33,7 @@ const Header = ({setNavOpen, navOpen, toggleTheme}) => {
                 onClick={onClick} 
             />
             <Typography variant='h3' sx={{ flexGrow: 1, textAlign: 'center' }}>
-                Breakin' The Ice
+                Ice Breaker Station
             </Typography>
             <Box sx={{ display: 'flex', alignItems: 'center', marginRight: 2 }}>
                 <Typography variant="body1" sx={{ marginRight: 1 }}>
