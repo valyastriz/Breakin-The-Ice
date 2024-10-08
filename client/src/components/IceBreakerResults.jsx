@@ -1,4 +1,4 @@
-import { Box, Typography } from '@mui/material';
+import { Box } from '@mui/material';
 import IceBreakerCard from './IceBreakerCard';
 
 const IceBreakerResults = ({ results, title, onAddFavorite, onRemoveFavorite }) => {

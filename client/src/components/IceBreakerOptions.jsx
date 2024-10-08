@@ -19,7 +19,7 @@ const IceBreakerOptions = () => {
     // Function to handle selection
     const handleSelect = (option) => {
         setSelection(option);  // Set the selection in context
-        navigate('/results');  // Navigate to the results page
+        navigate(`/results?title=${encodeURIComponent(option.title)}`);  // Navigate to the results page
     };
 
     return (
