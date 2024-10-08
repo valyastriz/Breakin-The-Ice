@@ -129,7 +129,7 @@ export const GET_QUOTES = gql`
 `;
 
 export const GET_BINGO_PROMPTS = gql`
-  query getRandomBingos($limit: Int!) {
+  query GetRandomBingos($limit: Int!) {
     getRandomBingos(limit: $limit) {
       content
     }
