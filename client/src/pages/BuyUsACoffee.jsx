@@ -5,6 +5,7 @@ import { Box, Typography } from '@mui/material'
 //import { loadStripe } from '@stripe/stripe-js';
 import PaymentForm from '../components/PaymentForm';
 import CoffeeSelection from '../components/CoffeeSelection';
+import { useTheme } from '@mui/material/styles';
 // import { QUERY_PROFILES } from '../utils/queries';
 
 const coffeeOptions = [
@@ -17,6 +18,8 @@ const coffeeOptions = [
 
 
 const BuyUsACoffee = () => {
+  const theme = useTheme(); // Access the theme
+  console.log(theme);
   const [selectedCoffee, setSelectedCoffee] = useState(null);
   const [coffeePrice, setCoffeePrice] = useState(0);
 
@@ -40,7 +43,7 @@ const BuyUsACoffee = () => {
   return (
    // <Elements stripe={stripePromise}>
       <Box sx={{display:'flex', flexGrow: 1, flexDirection: 'column', alignItems: 'center', justifyContent: 'center', minheight: '100%',
-        height: '100vh', width: '100%'}}>
+        height: '100vh', width: '100%', backgroundColor: theme.background.default}}>
           <Typography variant='h3' sx={{ textAlign: 'center', width: '80%' }}>Buy Us A Coffee!</Typography>
           <CoffeeSelection selectedCoffee={selectedCoffee} setSelectedCoffee={handleCoffeeSelect}/>
           <PaymentForm onPaymentSuccess={handlePaymentSuccess} coffeePrice={coffeePrice} />

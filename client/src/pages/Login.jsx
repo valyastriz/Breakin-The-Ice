@@ -49,7 +49,7 @@ const Login = () => {
         minheight: '100%',
         height: '100vh',
         width: '100%',
-        backgroundColor: theme.palette.background.default,
+        backgroundColor: theme.background.default,
       }}
     >
       <Box
@@ -59,7 +59,7 @@ const Login = () => {
           maxWidth: 500,
           width: '100%',
           padding: 4,
-          backgroundColor: theme.palette.background.paper,
+          backgroundColor: theme.background.paper,
           borderRadius: 2,
           boxShadow: '0 2px 10px rgba(0, 0, 0, 0.1)',
         }}
@@ -67,11 +67,11 @@ const Login = () => {
         {/* Heading */}
         <Typography
           variant="h4"
-          sx={{ textAlign: 'center', mb: 2, fontWeight: 'bold', color: theme.palette.primary.main }}
+          sx={{ textAlign: 'center', mb: 2, fontWeight: 'bold', color: theme.text.primary}}
         >
           Hi, Welcome
         </Typography>
-        <Typography variant="body1" sx={{ textAlign: 'center', mb: 4, color: theme.palette.text.secondary }}>
+        <Typography variant="body1" sx={{ textAlign: 'center', mb: 4, color: theme.text.secondary }}>
           Login to your account
         </Typography>
 
@@ -106,10 +106,10 @@ const Login = () => {
           }}
         >
           <FormControlLabel
-            control={<Checkbox sx={{ color: theme.palette.primary.main }} />}
+            control={<Checkbox sx={{ color: theme.text.primary }} />}
             label="Keep me logged in"
           />
-          <Link href="#" sx={{ textDecoration: 'none', color: theme.palette.primary.main }}>
+          <Link href="#" sx={{ textDecoration: 'none', color: theme.text.primary }}>
             Forgot Password?
           </Link>
         </Box>
@@ -120,11 +120,11 @@ const Login = () => {
           variant="contained"
           fullWidth
           sx={{
-            backgroundColor: theme.palette.primary.main,
-            color: theme.palette.text.primary,
+            backgroundColor: theme.background.accent,
+            color: theme.text.primary,
             mb: 3,
             ':hover': {
-              backgroundColor: theme.palette.primary.hover,
+              backgroundColor: theme.background.primary,
             },
           }}
         >
@@ -137,12 +137,12 @@ const Login = () => {
         {/* Sign Up Link */}
         <Typography
           variant="body2"
-          sx={{ textAlign: 'center', color: theme.palette.text.secondary }}
+          sx={{ textAlign: 'center', color: theme.text.secondary }}
         >
           Don't have an account?{' '}
           <Link
             onClick={handleSignUp}
-            sx={{ color: 'primary.main', cursor: 'pointer', textDecoration: 'none' }}
+            sx={{ color: theme.background.primary, cursor: 'pointer', textDecoration: 'none' }}
           >
             Sign up
           </Link>

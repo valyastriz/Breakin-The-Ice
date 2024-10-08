@@ -3,9 +3,12 @@ import { Card, CardContent, Typography, Divider, CardActionArea, IconButton } fr
 import FavoriteIcon from '@mui/icons-material/Favorite';
 import AuthService from '../utils/auth';  // Assuming you have AuthService for login check
 import LoginPromptModal from './LoginPromptModal';  // Import your LoginPromptModal
+import { useTheme } from '@mui/material/styles';
 
 const IceBreakerCard = ({ title, description, showHeart, onClick, onFavoriteClick, isFavorited }) => {
     const [loginModalOpen, setLoginModalOpen] = useState(false);
+
+    const theme = useTheme();
 
     const handleFavoriteClick = () => {
         if (!AuthService.loggedIn()) {
@@ -18,7 +21,7 @@ const IceBreakerCard = ({ title, description, showHeart, onClick, onFavoriteClic
     const handleCloseModal = () => setLoginModalOpen(false);
 
     return (
-        <Card sx={{ minWidth: 275, maxWidth: 300, margin: 2 }}>
+        <Card sx={{ minWidth: 275, maxWidth: 300, margin: 2, backgroundColor: theme.background.highlight}}>
             <CardActionArea onClick={onClick}>
                 <CardContent>
                     <Typography variant="h5" component="div">

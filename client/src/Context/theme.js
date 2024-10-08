@@ -26,44 +26,48 @@ const getDesignTokens = (mode) => ({
     },
   },
   background: {
-    default: mode === "dark" ? "#121212" : "#f4f4f4",
-    paper: mode === "dark" ? "#1e1e1e" : "#ffffff",
-    light: mode === "dark" ? "#2c2f33" : "#e0e0e0",
-    dark: mode === "dark" ? "#0d0d0d" : "#c7c7c7",
-    accent: mode === "dark" ? "#25274d" : "#9ab3f5", 
-    highlight: mode === "dark" ? "#464866" : "#dcdde1",
-  },
+    default: mode === "dark" ? "#0d1a33" : "#a3c1d4", // Darker navy for dark mode, soft icy blue for light mode
+    paper: mode === "dark" ? "#1e2a3d" : "#ffffff", // Slightly darker paper for dark mode
+    light: mode === "dark" ? "#2c3e50" : "#b3e5fc", // Darker grey for dark mode, light icy blue for light mode
+    dark: mode === "dark" ? "#0d0d0d" : "#c7c7c7", // Keep as is for contrast
+    accent: mode === "dark" ? "#1a3e6b" : "#dcdde1", // Icy accent colors
+    highlight: mode === "dark" ? "#4a607a" : "#e6f2ff", // Darker highlight for dark mode, soft highlight for light mode
+},
   text: {
     primary: mode === "dark" ? "#e0e0e0" : "#333333", // Light text on dark background, dark text on light background
     secondary: mode === "dark" ? "#b0bec5" : "#555555", // Adjust for readability
   },
   components: {
 
-      MuiButton: {
-        styleOverrides: {
-          root: {
-            color: (theme) => theme.palette.text.primary, // Set button text color to primary text color
+    MuiButton: {
+      styleOverrides: {
+        root: {
+          color: (theme) => theme.palette.text.primary, // Set button text color to primary text color
+        },
+        containedPrimary: {
+          backgroundColor: (theme) => theme.palette.primary.main, // Default background color
+          color: (theme) => theme.palette.text.primary, // Set text color
+          "&:hover": {
+            backgroundColor: (theme) => theme.palette.primary.hover, // Hover background color
+            color: (theme) => theme.palette.text.primary, // Ensure hover color matches
           },
-          containedPrimary: {
-            "&:hover": {
-              backgroundColor: "primary.hover",
-              color: (theme) => theme.palette.text.primary, // Ensure hover color matches
-            },
-          },
-          containedSecondary: {
-            "&:hover": {
-              backgroundColor: "secondary.hover",
-              color: (theme) => theme.palette.text.secondary, // Ensure hover color matches
-            },
+        },
+        containedSecondary: {
+          backgroundColor: (theme) => theme.palette.secondary.main, // Default background color
+          color: (theme) => theme.palette.text.secondary, // Set text color
+          "&:hover": {
+            backgroundColor: (theme) => theme.palette.secondary.hover, // Hover background color
+            color: (theme) => theme.palette.text.secondary, // Ensure hover color matches
           },
         },
       },
+    },
     
     MuiCard: {
       styleOverrides: {
         root: {
           "&:hover": {
-            backgroundColor: "#282828",
+            backgroundColor: (theme) => theme.palette.secondary.hover,
             boxShadow: "0 8px 20px 0 rgba(0,0,0,0.7)",
           },
         },

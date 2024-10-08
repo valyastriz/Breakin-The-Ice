@@ -59,7 +59,7 @@ const SignUp = () => {
         height: '100vh',
         width: '100%',
         overflow: 'auto',
-        backgroundColor: theme.palette.background.default,
+        backgroundColor: theme.background.default,
       }}
     >
       <Box
@@ -69,7 +69,7 @@ const SignUp = () => {
           maxWidth: 500,
           width: '100%',
           padding: 4,
-          backgroundColor: theme.palette.background.paper,
+          backgroundColor: theme.background.paper,
           borderRadius: 2,
           boxShadow: '0 2px 10px rgba(0, 0, 0, 0.1)',
         }}
@@ -77,11 +77,11 @@ const SignUp = () => {
         {/* Heading */}
         <Typography
           variant="h4"
-          sx={{ textAlign: 'center', mb: 2, fontWeight: 'bold', color: theme.palette.primary.main }}
+          sx={{ textAlign: 'center', mb: 2, fontWeight: 'bold', color: theme.text.primary }}
         >
           Sign up
         </Typography>
-        <Typography variant="body1" sx={{ textAlign: 'center', mb: 4, color: theme.palette.text.secondary }}>
+        <Typography variant="body1" sx={{ textAlign: 'center', mb: 4, color: theme.text.secondary }}>
           Enter credentials to continue
         </Typography>
 
@@ -121,11 +121,11 @@ const SignUp = () => {
           variant="contained"
           fullWidth
           sx={{
-            backgroundColor: theme.palette.primary.main,
-            color: theme.palette.text.primary,
+            backgroundColor: theme.background.accent,
+            color: theme.text.primary,
             mb: 3,
             ':hover': {
-              backgroundColor: theme.palette.primary.hover,  // Use hover from theme
+              backgroundColor: theme.background.primary,  // Use hover from theme
             },
           }}
         >
@@ -138,12 +138,12 @@ const SignUp = () => {
         {/* Sign In Link */}
         <Typography
           variant="body2"
-          sx={{ textAlign: 'center', color: theme.palette.text.secondary }}
+          sx={{ textAlign: 'center', color: theme.text.secondary }}
         >
           Already have an account?{' '}
           <Link
             onClick={handleLogin}  // Navigate to login page
-            sx={{ color: theme.palette.primary.main, cursor: 'pointer', textDecoration: 'none' }}
+            sx={{ color: theme.background.primary, cursor: 'pointer', textDecoration: 'none' }}
           >
             Sign In
           </Link>
