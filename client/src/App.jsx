@@ -13,7 +13,8 @@ import Login from './pages/Login';
 import SignUp from './pages/SignUp';
 import { Box, ThemeProvider, CssBaseline } from '@mui/material';
 import createAppTheme from './Context/theme';
-import  { PageProvider } from './Context/RefreshContext'
+import  { PageProvider } from './Context/RefreshContext';
+import { BingoProvider } from './Context/BingoContext';
 
 function App() {
   const [navOpen, setNavOpen] = useState(false);
@@ -30,7 +31,7 @@ function App() {
 
   return (
     <PageProvider >
-
+   <BingoProvider> 
    
     <ThemeProvider theme={currentTheme}>
       <CssBaseline />
@@ -56,6 +57,7 @@ function App() {
         </Box>
         </Router>
     </ThemeProvider>
+    </BingoProvider> 
     </PageProvider>
   );
 }

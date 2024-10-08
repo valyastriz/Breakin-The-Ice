@@ -1,7 +1,8 @@
 const db = require('../config/connection');
-const { WouldYouRather, IceBreaker, User, Law } = require('../models'); 
+const { WouldYouRather, IceBreaker, User, Law, Bingo } = require('../models'); 
 const wouldYouRatherSeeds = require('./wouldYouRatherSeeds.json');
 const iceBreakerSeeds = require('./iceBreakerSeeds.json');
+const bingoSeeds = require('./bingoSeeds.json');
 const cleanDB = require('./cleanDB');
 const userSeeds = require('./userSeeds.json');
 const lawSeeds = require('./lawSeeds.json');
@@ -15,6 +16,9 @@ db.once('open', async () => {
 
     await WouldYouRather.create(wouldYouRatherSeeds); 
 
+    await cleanDB('Bingo', 'bingo');
+
+    await Bingo.create(bingoSeeds);
 
 
     await cleanDB('IceBreaker', 'iceBreaker');

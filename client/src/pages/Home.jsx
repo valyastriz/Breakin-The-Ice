@@ -1,6 +1,7 @@
 import { Box, Typography } from '@mui/material';
 import IceBreakerOptions from '../components/IceBreakerOptions';
 import { useIcebreaker } from '../Context/IcebreakerContext';
+import BingoOption from '../components/BingoOption';
 import { useEffect } from 'react';
 import { useTheme } from '@mui/material/styles';
 
@@ -24,6 +25,8 @@ const Home = () => {
         <Typography variant='h3' sx={{ textAlign: 'center', width: '80%', marginBottom: 4}}>Unfreeze Any Conversation with a Smile!</Typography>
         <Typography variant='h5' sx={{ textAlign: 'center', width: '80%', marginBottom: 4}}>Select the type of icebreaker you'd like to generate.</Typography>
         <IceBreakerOptions onSelect={handleSelect} />
+        <Typography variant='h5' sx={{ textAlign: 'center', width: '80%', marginBottom: 4}}>Or Select the following game:</Typography>
+        <BingoOption />
     </Box>
   );
 };

@@ -6,4 +6,6 @@ const WouldYouRather = require('./WouldYouRather');
 
 const IceBreaker = require('./IceBreaker');
 
-module.exports = { User, Law, WouldYouRather, IceBreaker };
+const Bingo = require('./Bingo');
+
+module.exports = { User, Law, WouldYouRather, IceBreaker, Bingo };

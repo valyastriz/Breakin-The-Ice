@@ -15,8 +15,8 @@ const resolvers = {
   },
   
   Mutation: {
-    addIceBreaker: async (parent, { question }) => {
-      return IceBreaker.create({ question });
+    addIceBreaker: async (parent, { content }) => {
+      return IceBreaker.create({ content });
     },
     removeIceBreaker: async (parent, { id }) => {
       return IceBreaker.findByIdAndRemove(id);
