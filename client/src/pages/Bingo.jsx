@@ -38,6 +38,7 @@ const Bingo = () => {
   ];
 
   const handleGenerateNewBoard = () => {
+    setSelectedCards([12]); // Reset selected cards, keeping the center free space selected
     refetch(); // Refetch the prompts to generate a new board
     refreshPage(); // This can be used for resetting any additional page-level state
   };
