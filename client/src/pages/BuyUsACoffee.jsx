@@ -8,11 +8,8 @@ import CoffeeSelection from '../components/CoffeeSelection';
 // import { QUERY_PROFILES } from '../utils/queries';
 
 const coffeeOptions = [
-  { id: 'drip', name: 'Drip Coffee', price: 195 },
-  { id: 'cold', name: 'Cold Brew', price: 295 },
-  { id: 'latte', name: 'Latte', price: 295 },
-  { id: 'expresso', name: "Espresso", price: 300 },
-  { id: 'cappuccino', name: 'Cappuccino', price: 350 },
+  { id: 'drip', name: 'Drip Coffee', price: 500 },
+
 ];
 
 //const stripePromise = loadStripe(process.env.REACT_APP_STRIPE_SECRET_KEY);

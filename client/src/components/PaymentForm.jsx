@@ -38,7 +38,7 @@ const PaymentForm = ({ onPaymentSucces, coffeePrice }) => {
                     color="primary" 
                     //disabled={!stripe || coffeePrice <= 0}
                 >
-                    Buy Coffee for ${coffeePrice / 100}
+                    Checkout
                 </Button>
             </Box>
         </form>
