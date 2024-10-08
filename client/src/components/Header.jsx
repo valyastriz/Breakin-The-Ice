@@ -24,7 +24,7 @@ const Header = ({setNavOpen, navOpen, toggleTheme}) => {
             display: 'flex',
             flexGrow: 1,
             minHeight: '80px',
-            backgroundColor: 'primary.main',
+            backgroundColor: theme.background.highlight,
             alignItems: 'center',
             justifyContent: 'space-between'
         }}>
@@ -43,6 +43,7 @@ const Header = ({setNavOpen, navOpen, toggleTheme}) => {
                     checked={theme.palette.mode === 'dark'}
                     onChange={toggleTheme}
                     inputProps={{ 'aria-label': 'controlled' }}
+                    color={theme.palette.background.default}
                 />
             </Box>
         </Box>

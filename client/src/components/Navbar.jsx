@@ -26,16 +26,16 @@ const Navbar = ({ navOpen }) => {
             borderRight: width !== '0%' ? '3px solid lightgrey' : '',
             transition: 'width ease-in-out 0.3s',
             padding: width !== '0%' ? '10px' : '',
-            backgroundColor: theme.background.accent,
+            backgroundColor: theme.background.highlight,
         }}>
             {width !== '0%' && (
                 <Box>
-                    <Button component={RouterLink} to="/" sx={{ width: '100%', padding: '12px 0' }}>Home</Button>
+                    <Button component={RouterLink} to="/" sx={{ width: '100%', padding: '12px 0', color: (theme) => theme.palette.text.primary }}>Home</Button>
                     
                     {/* Conditionally render based on login status */}
                     {isLoggedIn ? (
                         <>
-                            <Button component={RouterLink} to="/favorites" sx={{ width: '100%', padding: '12px 0' }}>Favorites</Button>
+                            <Button component={RouterLink} to="/favorites" sx={{ width: '100%', padding: '12px 0', color: (theme) => theme.palette.text.primary }}>Favorites</Button>
                             <Button 
                                 sx={{ width: '100%', padding: '12px 0' }} 
                                 onClick={() => {
@@ -46,12 +46,12 @@ const Navbar = ({ navOpen }) => {
                             </Button>
                         </>
                     ) : (
-                        <Button component={RouterLink} to="/login" sx={{ width: '100%', padding: '12px 0' }}>Login</Button>
+                        <Button component={RouterLink} to="/login" sx={{ width: '100%', padding: '12px 0', color: (theme) => theme.palette.text.primary }}>Login</Button>
                     )}
 
-                    <Button component={RouterLink} to="/about" sx={{ width: '100%', padding: '12px 0' }}>About</Button>
-                    <Button component={RouterLink} to="/contact" sx={{ width: '100%', padding: '12px 0' }}>Contact</Button>
-                    <Button component={RouterLink} to="/buyusacoffee" sx={{ width: '100%', padding: '12px 0' }}>Buy us a coffee!</Button>
+                    <Button component={RouterLink} to="/about" sx={{ width: '100%', padding: '12px 0', color: (theme) => theme.palette.text.primary }}>About</Button>
+                    <Button component={RouterLink} to="/contact" sx={{ width: '100%', padding: '12px 0', color: (theme) => theme.palette.text.primary }}>Contact</Button>
+                    <Button component={RouterLink} to="/buyusacoffee" sx={{ width: '100%', padding: '12px 0', color: (theme) => theme.palette.text.primary }}>Buy us a coffee!</Button>
                 </Box>
             )}
         </Box>
