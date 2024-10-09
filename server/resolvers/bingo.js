@@ -10,8 +10,11 @@ const resolvers = {
     },
     getRandomBingos: async (_, { limit }) => {
       const allItems = await Bingo.find({});
-      return allItems.sort(() => 0.5 - Math.random()).slice(0, limit);
-    }
+      if (!allItems.length) {
+        throw new Error('No Bingo items found');
+      }
+      return allItems.sort(() => 0.5 - Math.random()).slice(0, limit); // Return random bingo prompts
+    },
   },
   
   Mutation: {

@@ -127,3 +127,11 @@ export const GET_QUOTES = gql`
     }
   }
 `;
+
+export const GET_BINGO_PROMPTS = gql`
+  query GetRandomBingos($limit: Int!) {
+    getRandomBingos(limit: $limit) {
+      content
+    }
+  }
+`;

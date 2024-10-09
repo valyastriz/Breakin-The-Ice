@@ -47,7 +47,7 @@ const startApolloServer = async () => {
     res.json('Hello world')
   })
 
-  const YOUR_DOMAIN = 'http://localhost:3001'; 
+  const YOUR_DOMAIN = 'http://localhost:3000'; 
   app.post('/create-checkout-session', async (req, res) => {
     const session = await stripe.checkout.sessions.create({
       line_items: [
@@ -57,8 +57,8 @@ const startApolloServer = async () => {
         },
       ],
       mode: 'payment',
-      success_url: `${YOUR_DOMAIN}?success=true`,
-      cancel_url: `${YOUR_DOMAIN}?canceled=true`,
+      success_url: `${YOUR_DOMAIN}/success`,
+      cancel_url: `${YOUR_DOMAIN}/buyusacoffee`,
     });
 
     res.redirect(303, session.url);
