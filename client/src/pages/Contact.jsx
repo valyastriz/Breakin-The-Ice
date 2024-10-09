@@ -7,7 +7,7 @@ const teamMembers = [
     firstName: 'Valya',
     lastName: 'Strizheus',
     role: 'Developer',
-    image: 'https://via.placeholder.com/150',
+    image: '/cute-poodle-dog-illustration_806257-200.avif',
     GitHub: 'https://github.com/valyastriz',
   },
   {
