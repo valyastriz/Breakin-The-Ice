@@ -31,9 +31,23 @@ const Success = () => {
         <Typography variant="h4" sx={{ mb: 4 }}>
           Payment Successful!
         </Typography>
-        <Typography variant="body1" sx={{ mb: 4 }}>
-          Thank you for your purchase. Your payment was processed successfully.
+        <Typography variant="body1" sx={{ mb: 4, textAlign: 'center' }}>
+          Thank you for buying us a coffee. Your payment was processed successfully. Please Enjoy the song below as a special thank you!
         </Typography>
+        {/* Embed video */}
+        <Box sx={{ mb: 4, width: '100%', maxWidth: '600px' }}>
+          <video
+            controls
+            style={{
+              width: '100%', // Make the video responsive
+              maxHeight: '60vh', // Restrict the height to a maximum of 60% of the viewport height
+              objectFit: 'contain', // Ensure the video scales and fits within the container without being cut off
+            }}
+          >
+            <source src="/thanks_for_the_coffee.mp4" type="video/mp4" />
+            Your browser does not support the video tag.
+          </video>
+        </Box>
         <Button
           variant="contained"
           onClick={handleHomeClick}
@@ -52,7 +66,6 @@ const Success = () => {
           width: '100%',
         }}
       >
-        <Typography variant="body2">© 2024 My Company</Typography>
       </Box>
     </Box>
   );
