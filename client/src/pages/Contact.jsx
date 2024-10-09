@@ -14,7 +14,7 @@ const teamMembers = [
     firstName: 'Ashley',
     lastName: 'Wright',
     role: 'Developer',
-    image: 'https://via.placeholder.com/150',
+    image: '/istockphoto-1385404682-612x612.jpg',
     GitHub: 'https://github.com/ajwmp93',
   },
   {
