@@ -70,7 +70,7 @@ const Bingo = () => {
           gridTemplateColumns: 'repeat(5, 1fr)', // 5 equally sized columns
           gap: '10px', // Set equal gap between rows and columns
           width: '80vw',  // Adjust to take up more of the screen width
-          maxWidth: '600px',  // Max width of the board for larger screens
+          maxWidth: '800px',  // Max width of the board for larger screens
           height: 'auto',
         }}
       >
