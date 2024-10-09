@@ -60,7 +60,7 @@ const Bingo = () => {
         Bingo Game
       </Typography>
       <Typography variant="body1" align="center" sx={{ marginBottom: '20px' }}>
-        Mingle with your peers and click on a box to color it when you find someone who fits the criteria. Try to get a full row, column, or diagonal to win!
+        Mingle with your peers and click on a box to color it when you find someone who fits the criteria. Try to get a full row, column, or diagonal row to win!
       </Typography>
 
       {/* Bingo Board */}
