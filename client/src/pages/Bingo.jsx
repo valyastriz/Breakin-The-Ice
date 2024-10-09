@@ -3,8 +3,10 @@ import { useState } from 'react';
 import BingoPlayingCard from '../components/BingoPlayingCard';
 import { useQuery } from '@apollo/client';
 import { GET_BINGO_PROMPTS } from '../utils/queries';
+import { useTheme } from '@mui/material/styles';
 
 const Bingo = () => {
+  const theme = useTheme(); // Access the theme
   const [selectedCards, setSelectedCards] = useState([12]); // Pre-select the center square (index 12)
   const { data, loading, error, refetch } = useQuery(GET_BINGO_PROMPTS, {
     variables: { limit: 24 }, // Fetch 24 random Bingo prompts (excluding the center free space)
@@ -48,6 +50,7 @@ const Bingo = () => {
         padding: '20px 10px',  // Add padding to prevent overlap with the header
         boxSizing: 'border-box',
         gap: '10px', // Reduce gap between elements
+        backgroundColor: theme.background.default
       }}
     >
       {/* Title and Instructions */}

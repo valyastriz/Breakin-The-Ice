@@ -5,8 +5,10 @@ import { useQuery, useMutation } from '@apollo/client';
 import { GET_FAVORITES } from '../utils/queries'; 
 import { REMOVE_FAVORITE } from '../utils/mutations'; // Import the remove mutation
 import AuthService from '../utils/auth';
+import { useTheme } from '@mui/material/styles';
 
 const Favorites = () => {
+    const theme = useTheme(); // Access the theme
     const { removeFavorite } = useIcebreaker();
     const token = AuthService.getToken();
     const profile = AuthService.getProfile();  
@@ -56,9 +58,10 @@ const Favorites = () => {
           justifyContent: 'center',
           height: '100%',
           minHeight: '100vh',
-          width: '100%'
+          width: '100%',
+          backgroundColor: theme.background.default
          }}>
-            <Typography variant='h3' sx={{ textAlign: 'center', width: '80%' }}>
+            <Typography variant='h3' sx={{ textAlign: 'center', width: '80%', color: theme.text.primary }}>
                 Favorites
             </Typography>
             <Box sx={{ display: 'flex', flexWrap: 'wrap', justifyContent: 'center' }}>
