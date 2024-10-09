@@ -16,6 +16,7 @@ import createAppTheme from './Context/theme';
 import  { PageProvider } from './Context/RefreshContext';
 import { BingoProvider } from './Context/BingoContext';
 import Bingo from './pages/Bingo';
+import Success from './pages/Success';
 
 function App() {
   const [navOpen, setNavOpen] = useState(false);
@@ -52,6 +53,7 @@ function App() {
                 <Route path="/login" element={<Login setThemeMode={setThemeMode}/>} />
                 <Route path="/signup" element={<SignUp setThemeMode={setThemeMode}/>} />
                 <Route path="/bingo" element={<Bingo setThemeMode={setThemeMode}/>} />
+                <Route path="/sucess" element={<Success setThemeMode={setThemeMode}/>} />
               </Routes>
             </Box>
           </Box>
