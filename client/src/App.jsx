@@ -53,7 +53,7 @@ function App() {
                 <Route path="/login" element={<Login setThemeMode={setThemeMode}/>} />
                 <Route path="/signup" element={<SignUp setThemeMode={setThemeMode}/>} />
                 <Route path="/bingo" element={<Bingo setThemeMode={setThemeMode}/>} />
-                <Route path="/sucess" element={<Success setThemeMode={setThemeMode}/>} />
+                <Route path="/success" element={<Success setThemeMode={setThemeMode}/>} />
               </Routes>
             </Box>
           </Box>
