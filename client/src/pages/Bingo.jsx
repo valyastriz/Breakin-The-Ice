@@ -3,28 +3,28 @@ import { useState } from 'react';
 import BingoPlayingCard from '../components/BingoPlayingCard';
 import { useQuery } from '@apollo/client';
 import { GET_BINGO_PROMPTS } from '../utils/queries';
-import { usePage } from '../Context/RefreshContext'; // Use the RefreshContext for refreshing the page
 
 const Bingo = () => {
   const [selectedCards, setSelectedCards] = useState([12]); // Pre-select the center square (index 12)
   const { data, loading, error, refetch } = useQuery(GET_BINGO_PROMPTS, {
     variables: { limit: 24 }, // Fetch 24 random Bingo prompts (excluding the center free space)
   });
-  
-  const { refreshPage } = usePage(); // Use the refreshPage function from the context
 
   const prompts = data ? data.getRandomBingos : [];
-  console.log('Bingo Prompts:', prompts);
 
   // Handle card selection/deselection
   const toggleCard = (index) => {
-    // Don't allow toggling the center free space
-    if (index === 12) return;
+    if (index === 12) return; // Don't allow toggling the center free space
     setSelectedCards((prevSelected) =>
       prevSelected.includes(index)
         ? prevSelected.filter((card) => card !== index)
         : [...prevSelected, index]
     );
+  };
+
+  const handleNewBoard = () => {
+    setSelectedCards([12]); // Reset the selection with center square pre-selected
+    refetch(); // Fetch new prompts
   };
 
   if (loading) return <Typography>Loading...</Typography>;
@@ -37,29 +37,41 @@ const Bingo = () => {
     ...prompts.slice(12),           // Remaining prompts after the free space
   ];
 
-  const handleGenerateNewBoard = () => {
-    setSelectedCards([12]); // Reset selected cards, keeping the center free space selected
-    refetch(); // Refetch the prompts to generate a new board
-    refreshPage(); // This can be used for resetting any additional page-level state
-  };
-
   return (
-    <Box sx={{ padding: 4 }}>
+    <Box
+      sx={{
+        display: 'flex',
+        flexDirection: 'column',
+        alignItems: 'center',
+        justifyContent: 'center',
+        minHeight: '100vh', // Ensure the full height is used
+        padding: '20px 10px',  // Add padding to prevent overlap with the header
+        boxSizing: 'border-box',
+        gap: '10px', // Reduce gap between elements
+      }}
+    >
       {/* Title and Instructions */}
-      <Typography variant="h3" align="center" gutterBottom>
+      <Typography 
+        variant="h4" 
+        align="center" 
+        gutterBottom 
+        sx={{ marginBottom: '10px', paddingTop: '20px' }} // Padding on top to ensure space from header
+      >
         Bingo Game
       </Typography>
-      <Typography variant="h6" align="center" sx={{ mb: 4 }}>
-        Mingle with your peers and click on a box to color it when you find someone who fits the criteria. Try to get a full row, column, or diagonal filled row to win!
+      <Typography variant="body1" align="center" sx={{ marginBottom: '20px' }}>
+        Mingle with your peers and click on a box to color it when you find someone who fits the criteria. Try to get a full row, column, or diagonal to win!
       </Typography>
 
       {/* Bingo Board */}
       <Box
         sx={{
           display: 'grid',
-          gridTemplateColumns: 'repeat(5, 1fr)',
-          gap: 2,
-          justifyContent: 'center',
+          gridTemplateColumns: 'repeat(5, 1fr)', // 5 equally sized columns
+          gap: '10px', // Set equal gap between rows and columns
+          width: '80vw',  // Adjust to take up more of the screen width
+          maxWidth: '600px',  // Max width of the board for larger screens
+          height: 'auto',
         }}
       >
         {bingoBoard.map((prompt, index) => (
@@ -68,20 +80,31 @@ const Bingo = () => {
             content={prompt.content}
             isSelected={selectedCards.includes(index)}
             onClick={() => toggleCard(index)}
+            sx={{
+              aspectRatio: '1 / 1', // Ensure the cards are always square
+              minWidth: '80px',
+              minHeight: '80px',
+              width: '100%', 
+              margin: 'auto',
+            }}
           />
         ))}
       </Box>
 
-      {/* Generate New Board Button */}
-      <Box sx={{ textAlign: 'center', mt: 4 }}>
-        <Button
-          variant="contained"
-          onClick={handleGenerateNewBoard}
-          sx={{ backgroundColor: 'primary.main', color: '#fff' }}
-        >
-          Generate New Board
-        </Button>
-      </Box>
+      {/* Button to Generate New Board */}
+      <Button
+        variant="contained"
+        onClick={handleNewBoard}
+        sx={{
+          mt: '10px',  // Reduce the margin between the button and the board
+          backgroundColor: 'primary.main',
+          color: '#fff',
+          width: '100%',
+          maxWidth: '300px', // Limit the button width
+        }}
+      >
+        Generate a New Board
+      </Button>
     </Box>
   );
 };

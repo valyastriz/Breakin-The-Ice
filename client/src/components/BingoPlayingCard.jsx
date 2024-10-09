@@ -10,8 +10,6 @@ const BingoPlayingCard = ({ content, isSelected, onClick, sx }) => {
     <Card
       onClick={onClick}
       sx={{
-        minWidth: 150,
-        minHeight: 150,
         backgroundColor: isSelected
           ? theme.palette.primary.main
           : theme.palette.mode === 'dark'
@@ -19,14 +17,39 @@ const BingoPlayingCard = ({ content, isSelected, onClick, sx }) => {
           : '#d3d3d3', // Lighter gray for light mode
         color: theme.palette.mode === 'dark' ? '#fff' : '#000',
         display: 'flex',
-        justifyContent: 'center',
         alignItems: 'center',
+        justifyContent: 'center',
         cursor: 'pointer',
+        aspectRatio: '1 / 1',  // Ensure the card is always square
         ...sx,
       }}
     >
-      <CardContent>
-        <Typography variant="body1" align="center">
+      <CardContent
+        sx={{
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'center',
+          padding: '8px !important',
+          height: '100%',
+          width: '100%',
+          textAlign: 'center', // Ensure text is centered horizontally
+        }}
+      >
+        <Typography
+          variant="body1"
+          align="center"
+          sx={{
+            fontSize: 'clamp(10px, 2vw, 16px)',  // Dynamically adjust font size
+            lineHeight: 1.1,
+            textAlign: 'center',  // Center the text
+            width: '100%',  // Ensure text takes up the full card space
+            height: '100%',
+            display: 'flex',
+            alignItems: 'center',  // Vertically center text
+            justifyContent: 'center',  // Horizontally center text
+            wordWrap: 'break-word',  // Break long words
+          }}
+        >
           {content}
         </Typography>
       </CardContent>
