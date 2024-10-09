@@ -21,7 +21,7 @@ const teamMembers = [
     firstName: 'Kendra',
     lastName: 'DeFrancisco',
     role: 'Developer',
-    image: 'https://via.placeholder.com/150',
+    image: '/a5c9a26a62ebd3fc0bdf2ad6a866b665.jpg',
     GitHub: 'https://github.com/defrak2',
   },
 ];
