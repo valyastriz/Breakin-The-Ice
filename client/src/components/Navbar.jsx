@@ -37,7 +37,7 @@ const Navbar = ({ navOpen }) => {
                         <>
                             <Button component={RouterLink} to="/favorites" sx={{ width: '100%', padding: '12px 0', color: (theme) => theme.palette.text.primary }}>Favorites</Button>
                             <Button 
-                                sx={{ width: '100%', padding: '12px 0' }} 
+                                sx={{ width: '100%', padding: '12px 0', color: (theme) => theme.palette.text.primary }} 
                                 onClick={() => {
                                     AuthService.logout();  // Call AuthService to log out
                                     window.location.assign('/');  // Redirect after logging out

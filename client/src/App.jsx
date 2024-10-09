@@ -18,7 +18,9 @@ import { BingoProvider } from './Context/BingoContext';
 import Bingo from './pages/Bingo';
 import Success from './pages/Success';
 
+
 function App() {
+
   const [navOpen, setNavOpen] = useState(false);
   const [themeMode, setThemeMode] = useState('dark');
 
@@ -38,7 +40,7 @@ function App() {
     <ThemeProvider theme={currentTheme}>
       <CssBaseline />
         <Router>
-        <Box sx={{ display: 'flex', flexGrow: 1, flexDirection: 'column' }}>
+        <Box sx={{ display: 'flex', flexGrow: 1, flexDirection: 'column'}}>
           <Header setNavOpen={setNavOpen} navOpen={navOpen} toggleTheme={toggleTheme}/>
           <Box sx={{ display: 'flex', flexGrow: 1, flexDirection: 'row' }}>
             <Navbar navOpen={navOpen} />
