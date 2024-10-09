@@ -8,21 +8,21 @@ const teamMembers = [
     lastName: 'Strizheus',
     role: 'Developer',
     image: 'https://via.placeholder.com/150',
-    email: 'valya@example.com',
+    GitHub: 'https://github.com/valyastriz',
   },
   {
     firstName: 'Ashley',
     lastName: 'Wright',
     role: 'Developer',
     image: 'https://via.placeholder.com/150',
-    email: 'ashley@example.com',
+    GitHub: 'https://github.com/ajwmp93',
   },
   {
     firstName: 'Kendra',
     lastName: 'DeFrancisco',
     role: 'Developer',
     image: 'https://via.placeholder.com/150',
-    email: 'kendra@example.com',
+    GitHub: 'https://github.com/defrak2',
   },
 ];
 
@@ -64,16 +64,18 @@ const Contact = () => {
                     backgroundColor: theme.background.primary,
                   },
                 }}
-                href={`mailto:${member.email}`}
+                href={member.GitHub} 
+                target="_blank" 
+                rel="noopener noreferrer" 
               >
-                Contact
+                GitHub
               </Button>
             </CardContent>
           </Card>
         ))}
       </Box>
       <Typography variant='h5' sx={{ marginTop: 4, textAlign: 'center', color: theme.text.primary}}>
-        For more information, feel free to reach out to any one of us at the above contact buttons.
+        Please feel free to check out our personal GitHub accounts by clicking one of the buttons above.
       </Typography>
     </Box>
   );
