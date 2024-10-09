@@ -61,7 +61,7 @@ const Favorites = () => {
           width: '100%',
           backgroundColor: theme.background.default
          }}>
-            <Typography variant='h3' sx={{ textAlign: 'center', width: '80%' }}>
+            <Typography variant='h3' sx={{ textAlign: 'center', width: '80%', color: theme.text.primary }}>
                 Favorites
             </Typography>
             <Box sx={{ display: 'flex', flexWrap: 'wrap', justifyContent: 'center' }}>

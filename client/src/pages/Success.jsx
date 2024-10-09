@@ -1,9 +1,11 @@
 import React from 'react';
 import { Box, Typography, Button } from '@mui/material';
 import { useNavigate } from 'react-router-dom';
+import { useTheme } from '@mui/material/styles';
 
 const Success = () => {
   const navigate = useNavigate();
+  const theme = useTheme();
 
   const handleHomeClick = () => {
     navigate('/'); // Redirect to homepage
@@ -12,9 +14,11 @@ const Success = () => {
   return (
     <Box
       sx={{
+
         display: 'flex',
         flexDirection: 'column',
         minHeight: '100vh', // Ensure it takes up the full viewport height
+        backgroundColor: theme.background.default,
       }}
     >
       {/* Main content */}
@@ -31,7 +35,7 @@ const Success = () => {
         <Typography variant="h4" sx={{ mb: 4 }}>
           Payment Successful!
         </Typography>
-        <Typography variant="body1" sx={{ mb: 4, textAlign: 'center' }}>
+        <Typography variant="body1" sx={{ mb: 4, textAlign: 'center', color: theme.text.primary }}>
           Thank you for buying us a coffee. Your payment was processed successfully. Please Enjoy the song below as a special thank you!
         </Typography>
         {/* Embed video */}
