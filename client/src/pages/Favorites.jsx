@@ -57,9 +57,10 @@ const Favorites = () => {
           alignItems: 'center',
           justifyContent: 'center',
           height: '100%',
-          minHeight: '100vh',
+          minHeight: '80vh',
           width: '100%',
-          backgroundColor: theme.background.default
+          backgroundColor: theme.background.default,
+          padding: '20px'
          }}>
             <Typography variant='h3' sx={{ textAlign: 'center', width: '80%', color: theme.text.primary }}>
                 Favorites

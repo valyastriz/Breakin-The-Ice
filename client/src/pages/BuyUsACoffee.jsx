@@ -42,8 +42,7 @@ const BuyUsACoffee = () => {
 
   return (
    // <Elements stripe={stripePromise}>
-      <Box sx={{display:'flex', flexGrow: 1, flexDirection: 'column', alignItems: 'center', justifyContent: 'center', minheight: '100%',
-        height: '100vh', width: '100%', backgroundColor: theme.background.default}}>
+      <Box sx={{display:'flex', flexGrow: 1, flexDirection: 'column', alignItems: 'center', justifyContent: 'center', minHeight: '80vh', padding: '15px', width: '100%', backgroundColor: theme.background.default}}>
           <Typography variant='h3' sx={{ textAlign: 'center', width: '80%', color: theme.text.primary }}>Buy Us A Coffee!</Typography>
           <CoffeeSelection selectedCoffee={selectedCoffee} setSelectedCoffee={handleCoffeeSelect}/>
           <PaymentForm onPaymentSuccess={handlePaymentSuccess} coffeePrice={coffeePrice} />

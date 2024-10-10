@@ -21,7 +21,7 @@ const theme = useTheme();
         left: 0,
       }}
     >
-      <Typography variant='body1'>
+      <Typography variant='body1' sx={{ color:theme.text.primary}}>
         Let's break the ice and chill with some cool questions!
       </Typography>
     </Box>

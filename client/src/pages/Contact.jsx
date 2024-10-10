@@ -30,9 +30,9 @@ const Contact = () => {
   const theme = useTheme(); // Access the theme
 
   return (
-    <Box sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center', padding: 4, minheight: '100%',
-    height: '100vh', backgroundColor: theme.background.default }}>
-      <Typography variant='h3' sx={{ marginBottom: 4, textAlign: 'center', color: theme.text.primary}}>
+    <Box sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center', padding: 4,
+    minHeight: '80vh', backgroundColor: theme.background.default, paddingTop: '30px' }}>
+      <Typography variant='h3' sx={{ paddingTop: '30px', marginBottom: 10, textAlign: 'center', color: theme.text.primary}}>
         Meet Our Team
       </Typography>
       <Box sx={{ display: 'flex', flexWrap: 'wrap', justifyContent: 'center', gap: 4 }}>
@@ -74,7 +74,7 @@ const Contact = () => {
           </Card>
         ))}
       </Box>
-      <Typography variant='h5' sx={{ marginTop: 4, textAlign: 'center', color: theme.text.primary}}>
+      <Typography variant='h5' sx={{ marginTop: 4, textAlign: 'center', color: theme.text.primary, marginTop: 10}}>
         Please feel free to check out our personal GitHub accounts by clicking one of the buttons above.
       </Typography>
     </Box>

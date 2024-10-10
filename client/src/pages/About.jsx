@@ -6,9 +6,9 @@ const About = () => {
   const theme = useTheme(); // Access the theme
 
   return (
-    <Box sx={{ padding: 4, display: 'flex', flexDirection: 'column', alignItems: 'center',  minHeight: '100%', height: '100vh', backgroundColor: theme.background.default }}>
+    <Box sx={{ padding: 4, display: 'flex', flexDirection: 'column', alignItems: 'center',  minHeight: '80vh', backgroundColor: theme.background.default }}>
       <Box sx={{ textAlign: 'center', marginBottom: 6  }}>
-        <Typography variant="h3" sx={{ marginBottom: 6, color: theme.text.primary}}>
+        <Typography variant="h3" sx={{ marginTop: '25px', marginBottom: 6, color: theme.text.primary}}>
           About This Project
         </Typography>
         <Typography variant="h5" color="text.secondary">

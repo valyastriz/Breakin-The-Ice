@@ -55,11 +55,11 @@ const SignUp = () => {
         flexDirection: 'column',
         alignItems: 'center',
         justifyContent: 'center',
-        minheight: '100%',
-        height: '100vh',
+        minHeight: '80vh',
         width: '100%',
         overflow: 'auto',
         backgroundColor: theme.background.default,
+        padding: '5px',
       }}
     >
       <Box

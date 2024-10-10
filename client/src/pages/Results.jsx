@@ -7,8 +7,10 @@ import { ADD_FAVORITE } from '../utils/mutations';  // Import the mutation
 import AuthService from '../utils/auth';
 import React, { useEffect } from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
+import { useTheme } from '@mui/material/styles';
 
 const Results = () => {
+    const theme = useTheme(); // Access the theme
     const { selection, removeFavorite, favorites, addFavorite } = useIcebreaker();
     const profile = AuthService.loggedIn() ? AuthService.getProfile() : null;
     const userId = profile?.data?._id || null;  // Only get userId if logged in
@@ -110,8 +112,10 @@ const Results = () => {
             alignItems: 'center',
             justifyContent: 'center',
             height: '100%',
-            minHeight: '100vh',
-            width: '100%'
+            minHeight: '80vh',
+            width: '100%',
+            backgroundColor: theme.background.default,
+            padding: '20px'
         }}>
             <Typography variant='h3' sx={{ textAlign: 'center', width: '80%' }}>
                 {selection ? `${selection.title}` : "No selection made"}
