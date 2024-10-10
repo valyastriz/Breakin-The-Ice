@@ -48,7 +48,7 @@ const Success = () => {
               objectFit: 'contain', // Ensure the video scales and fits within the container without being cut off
             }}
           >
-            <source src="/thanks_for_the_coffee.mp4" type="video/mp4" />
+            <source src="/Thanks_For_The_Coffee_Video.mp4" type="video/mp4" />
             Your browser does not support the video tag.
           </video>
         </Box>
