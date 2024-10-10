@@ -1,53 +1,60 @@
-// import { useQuery } from '@apollo/client';
-import { Box, Typography, Switch } from '@mui/material'
-import DragHandleIcon from '@mui/icons-material/DragHandle';
+import { Box, Typography, Switch } from '@mui/material';
 import { useTheme } from '@mui/material/styles';
+import DragHandleIcon from '@mui/icons-material/DragHandle';
+import Navbar from './Navbar'; // Import the Navbar
+import { useCollapse } from '../Context/CollapseContext'; // Use collapse context
 
-// import { QUERY_PROFILES } from '../utils/queries';
+const Header = ({ toggleTheme }) => {
+  const theme = useTheme();
+  const { navOpen, toggleNav } = useCollapse();
 
-const Header = ({setNavOpen, navOpen, toggleTheme}) => {
-//   const { loading, data } = useQuery(QUERY_PROFILES);
-//   const profiles = data?.profiles || [];
-    const theme = useTheme();
-    const onClick = () => {
-        setNavOpen(!navOpen);
-    }
-
-    //   const toggleTheme = () => {
-    // console.log(theme.palette.mode)
-    //   theme.palette.mode = theme.palette.mode ? 'light' : 'dark';
-    //   console.log(theme.palette.mode)
-
-    // };    
-    return (
-        <Box sx={{
-            display: 'flex',
-            flexGrow: 1,
-            minHeight: '80px',
-            backgroundColor: theme.background.highlight,
-            alignItems: 'center',
-            justifyContent: 'space-between'
-        }}>
-            <DragHandleIcon 
-                sx={{ height: '40px', width: '40px', cursor: 'pointer', marginLeft: 1 }} 
-                onClick={onClick} 
-            />
-            <Typography variant='h3' sx={{ flexGrow: 1, textAlign: 'center' }}>
-                Ice Breaker Station
-            </Typography>
-            <Box sx={{ display: 'flex', alignItems: 'center', marginRight: 2 }}>
-                <Typography variant="body1" sx={{ marginRight: 1 }}>
-                    {theme.palette.mode === 'dark' ? 'Dark Mode' : 'Light Mode'}
-                </Typography>
-                <Switch
-                    checked={theme.palette.mode === 'dark'}
-                    onChange={toggleTheme}
-                    inputProps={{ 'aria-label': 'controlled' }}
-                    color={theme.palette.background.default}
-                />
-            </Box>
+  return (
+    <Box sx={{
+      display: 'flex',
+      flexDirection: 'column',
+      width: '100%',
+      backgroundColor: theme.background.highlight,
+    }}>
+      <Box sx={{
+        display: 'flex',
+        flexDirection: 'row',
+        width: '100%',
+        alignItems: 'center',
+        justifyContent: 'space-between',
+        padding: '10px 20px',
+      }}>
+        {/* Dark Mode Toggle on the left */}
+        <Box sx={{ display: 'flex', alignItems: 'center' }}>
+          <Typography variant="body1" sx={{ marginRight: 1 }}>
+            {theme.palette.mode === 'dark' ? 'Dark Mode' : 'Light Mode'}
+          </Typography>
+          <Switch
+            checked={theme.palette.mode === 'dark'}
+            onChange={toggleTheme}
+            inputProps={{ 'aria-label': 'controlled' }}
+          />
         </Box>
-    );
+
+        {/* Navbar tabs on larger screens */}
+        <Box sx={{ display: { xs: 'none', md: 'flex' }, alignItems: 'center' }}>
+          <Navbar />
+        </Box>
+
+        {/* Collapse button on smaller screens */}
+        <DragHandleIcon
+          sx={{ display: { xs: 'block', md: 'none' }, cursor: 'pointer' }}
+          onClick={toggleNav}
+        />
+      </Box>
+
+      {/* Collapsed menu on small screens */}
+      {navOpen && (
+        <Box sx={{ display: { xs: 'block', md: 'none' }, width: '100%' }}>
+          <Navbar isVertical /> {/* Pass isVertical prop to show it vertically */}
+        </Box>
+      )}
+    </Box>
+  );
 };
 
 export default Header;

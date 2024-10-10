@@ -21,7 +21,7 @@ const Home = () => {
   };
 
   return (
-    <Box sx={{ display: 'flex', flexGrow: 1, flexDirection: 'column', alignItems: 'center', justifyContent: 'center', height: '100%', minHeight: '100vh', width: '100%', overflow: 'auto', position: 'relative', backgroundColor: theme.background.default}}>
+    <Box sx={{ display: 'flex', flexGrow: 1, flexDirection: 'column', alignItems: 'center', justifyContent: 'center', height: '100%', minHeight: '80vh', width: '100%', overflow: 'auto', position: 'relative', backgroundColor: theme.background.default}}>
         <Typography variant='h3' sx={{ textAlign: 'center', width: '80%', marginBottom: 4, color: theme.text.primary }}>Unfreeze Any Conversation with a Smile!</Typography>
         <Typography variant='h5' sx={{ textAlign: 'center', width: '80%', marginBottom: 4, color: theme.text.primary}}>Select the type of icebreaker you'd like to generate.</Typography>
         <IceBreakerOptions onSelect={handleSelect} />

@@ -47,9 +47,10 @@ const Login = () => {
         alignItems: 'center',
         justifyContent: 'center',
         minheight: '100%',
-        height: '100vh',
+        height: '80vh',
         width: '100%',
         backgroundColor: theme.background.default,
+        padding: '5px'
       }}
     >
       <Box
