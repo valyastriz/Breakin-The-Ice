@@ -67,10 +67,16 @@ const startApolloServer = async () => {
   server.applyMiddleware({ app, path: '/graphql' });
 
   if (process.env.NODE_ENV === 'production') {
-    app.use(express.static(path.join(__dirname, '../client/dist')));
-
+    // Serve static files from the React app's build folder
+    app.use(express.static(path.join(__dirname, '../client/build')));
+  
+    app.get('/test', (req, res) => {
+      res.sendFile(path.join(__dirname, '../client/build/index.html'));
+    });
+    
+    // All other GET requests should return the React app's index.html file
     app.get('*', (req, res) => {
-      res.sendFile(path.join(__dirname, '../client/dist/index.html'));
+      res.sendFile(path.join(__dirname, '../client/build/index.html'));
     });
   }
 
