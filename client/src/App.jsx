@@ -3,6 +3,7 @@ import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import Header from './components/Header';
 import Footer from './components/Footer';
 import Navbar from './components/Navbar';
+import HeroSection from './components/Hero';
 import Home from './pages/Home';
 import Results from './pages/Results';
 import Contact from './pages/Contact';
@@ -45,6 +46,7 @@ function App() {
           <Box sx={{ display: 'flex', flexGrow: 1, flexDirection: 'row' }}>
             <Navbar navOpen={navOpen} />
             <Box sx={{ flexGrow: 1 }}>
+              <HeroSection />
               <Routes>
                 <Route path="/" element={<Home setThemeMode={setThemeMode}/>} />
                 <Route path="/results" element={<Results setThemeMode={setThemeMode} />} />
