@@ -3,9 +3,11 @@
   "version": "1.0.0",
   "main": "index.js",
   "scripts": {
-    "start": "node server/server.js",
+    "start": "concurrently \"npm run start --prefix server\" \"npm run start --prefix client\" && npm run seed", 
     "install": "cd server && npm install && cd ../client && npm install",
     "build": "npm run build --prefix client", 
+    "heroku-postbuild": "npm run build --prefix client",
+    "seed": "cd server && node seeders/seed.js",
     "dev": "concurrently \"npm run dev --prefix server\" \"npm run start --prefix client\""
   },
   "devDependencies": {
