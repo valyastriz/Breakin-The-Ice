@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "main": "index.js",
   "scripts": {
-    "start": "concurrently \"npm run start --prefix server\" \"npm run start --prefix client\" && npm run seed", 
+    "start": "concurrently \"npm run start --prefix server\" \"npm run start --prefix client\"", 
     "install": "cd server && npm install && cd ../client && npm install",
     "build": "npm run build --prefix client", 
     "heroku-postbuild": "npm run build --prefix client",
