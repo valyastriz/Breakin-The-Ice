@@ -5,10 +5,11 @@
   "scripts": {
     "start": "node server/server.js", 
     "install": "cd server && npm install && cd ../client && npm install",
-    "build": "npm run build --prefix client", 
+    "build": "cd client && npm run build", 
     "heroku-postbuild": "npm run build --prefix client",
     "seed": "cd server && node seeders/seed.js",
-    "dev": "concurrently \"npm run dev --prefix server\" \"npm run start --prefix client\""
+    "dev": "concurrently \"npm run dev --prefix server\" \"npm run start --prefix client\"",
+    "render-build":"npm install && npm run build"
   },
   "devDependencies": {
     "concurrently": "^6.5.1"
