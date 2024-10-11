@@ -47,7 +47,7 @@ const startApolloServer = async () => {
     res.json('Hello world')
   })
 
-  const YOUR_DOMAIN = 'http://localhost:3000'; 
+  const YOUR_DOMAIN = 'https://breakin-the-ice.onrender.com/'; 
   app.post('/create-checkout-session', async (req, res) => {
     const session = await stripe.checkout.sessions.create({
       line_items: [
