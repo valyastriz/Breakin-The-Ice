@@ -53,16 +53,16 @@ root.render(
 // or send to an analytics endpoint. Learn more: https://bit.ly/CRA-vitals
 reportWebVitals();
 
-// Register the service worker
-if ('serviceWorker' in navigator) {
-  window.addEventListener('load', () => {
-    navigator.serviceWorker
-      .register(`${process.env.PUBLIC_URL}/service-worker.js`)
-      .then((registration) => {
-        console.log('ServiceWorker registration successful with scope: ', registration.scope);
-      })
-      .catch((error) => {
-        console.log('ServiceWorker registration failed: ', error);
-      });
-  });
-}
+// // Register the service worker
+// if ('serviceWorker' in navigator) {
+//   window.addEventListener('load', () => {
+//     navigator.serviceWorker
+//       .register(`${process.env.PUBLIC_URL}/service-worker.js`)
+//       .then((registration) => {
+//         console.log('ServiceWorker registration successful with scope: ', registration.scope);
+//       })
+//       .catch((error) => {
+//         console.log('ServiceWorker registration failed: ', error);
+//       });
+//   });
+// }
