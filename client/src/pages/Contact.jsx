@@ -74,7 +74,7 @@ const Contact = () => {
           </Card>
         ))}
       </Box>
-      <Typography variant='h5' sx={{ marginTop: 4, textAlign: 'center', color: theme.text.primary, marginTop: 10}}>
+      <Typography variant='h5' sx={{ textAlign: 'center', color: theme.text.primary, marginTop: 10}}>
         Please feel free to check out our personal GitHub accounts by clicking one of the buttons above.
       </Typography>
     </Box>

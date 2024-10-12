@@ -6,16 +6,16 @@ const stripe = require('stripe')('sk_test_51Q60NOJxeDwsAPSIVSDxy1MBisduJOsOfi3ZY
 const typeDefs = require('./schemas');
 const resolvers = require('./resolvers');
 const db = require('./config/connection');
-const { authMiddleware } = require('./utils/auth');  // Import the authMiddleware
+const { authMiddleware } = require('./utils/auth');
 
 const PORT = process.env.PORT || 3001;
 const app = express();
 
-// Create a new instance of an Apollo server with the GraphQL schema
+// Apollo Server setup with GraphQL schema
 const server = new ApolloServer({
   typeDefs,
   resolvers,
-  context: ({ req }) => authMiddleware({ req }),  // Apply authMiddleware in the context
+  context: ({ req }) => authMiddleware({ req }),
   formatError: (error) => {
     console.log(error);
     return error;
@@ -28,8 +28,9 @@ const startApolloServer = async () => {
   app.use(express.urlencoded({ extended: true }));
   app.use(express.json());
 
+  // Stripe payment API routes
   app.post('/create-payment-intent', async (req, res) => {
-    const { amount } = req.body; // Amount should be in cents
+    const { amount } = req.body;
 
     try {
       const paymentIntent = await stripe.paymentIntents.create({
@@ -44,10 +45,11 @@ const startApolloServer = async () => {
   });
 
   app.get('/hello', (req, res) => {
-    res.json('Hello world')
-  })
+    res.json('Hello world');
+  });
 
-  const YOUR_DOMAIN = 'http://localhost:3000'; 
+  // Stripe checkout session route
+  const YOUR_DOMAIN = 'http://localhost:3000';
   app.post('/create-checkout-session', async (req, res) => {
     const session = await stripe.checkout.sessions.create({
       line_items: [
@@ -63,23 +65,21 @@ const startApolloServer = async () => {
 
     res.redirect(303, session.url);
   });
-  // Apply the Apollo GraphQL middleware and set the path to /graphql
+
+  // Apply Apollo middleware
   server.applyMiddleware({ app, path: '/graphql' });
 
+  // Serve static files from the React app if in production
   if (process.env.NODE_ENV === 'production') {
-    // Serve static files from the React app's build folder
     app.use(express.static(path.join(__dirname, '../client/build')));
-  
-    app.get('/test', (req, res) => {
-      res.sendFile(path.join(__dirname, '../client/build/index.html'));
-    });
-    
-    // All other GET requests should return the React app's index.html file
+
+    // Serve the index.html file for all non-API requests
     app.get('*', (req, res) => {
       res.sendFile(path.join(__dirname, '../client/build/index.html'));
     });
   }
 
+  // Database connection and start the server
   db.once('open', () => {
     app.listen(PORT, () => {
       console.log(`🚀 API server running on port ${PORT}!`);
@@ -88,5 +88,5 @@ const startApolloServer = async () => {
   });
 };
 
-// Call the async function to start the server
+// Start the Apollo server
 startApolloServer();

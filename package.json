@@ -3,9 +3,9 @@
   "version": "1.0.0",
   "main": "index.js",
   "scripts": {
-    "start": "concurrently \"npm run start --prefix server\" \"npm run start --prefix client\"", 
+    "start": "npm run build --prefix client && NODE_ENV=production node server/server.js",
     "install": "cd server && npm install && cd ../client && npm install",
-    "build": "npm run build --prefix client", 
+    "build": "npm run build --prefix client",
     "heroku-postbuild": "npm run build --prefix client",
     "dev": "concurrently \"npm run dev --prefix server\" \"npm run start --prefix client\""
   },

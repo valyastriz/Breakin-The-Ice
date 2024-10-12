@@ -12,7 +12,7 @@ import AuthService from './utils/auth';  // Import your AuthService
 
 // Create HTTP link to your GraphQL server
 const httpLink = createHttpLink({
-  uri: 'http://localhost:3001/graphql',
+  uri: process.env.REACT_APP_GRAPHQL_URI || 'http://localhost:3001/graphql', // Default to localhost for development
 });
 
 // Middleware to include the token in the headers
@@ -26,6 +26,7 @@ const authLink = setContext((_, { headers }) => {
     },
   };
 });
+
 
 // Apollo client setup with authLink to include the token in requests
 const client = new ApolloClient({
