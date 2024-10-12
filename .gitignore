@@ -132,4 +132,6 @@ dist
 
 .DS_Store
 
+# Ignore standard .env file but not .env.production
 .env
+!client/.env.production

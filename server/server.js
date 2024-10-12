@@ -2,7 +2,7 @@ const express = require('express');
 require('dotenv').config();
 const { ApolloServer } = require('apollo-server-express');
 const path = require('path');
-const stripe = require('stripe')('sk_test_51Q60NOJxeDwsAPSIVSDxy1MBisduJOsOfi3ZYApaSQGrvXO8lcXpXZ1n7NnyPlsnIIbw0DfIa2jSWa5g9nugMHAh003dblXXal');
+const stripe = require('stripe')(process.env.STRIPE_SECRET_KEY);
 const typeDefs = require('./schemas');
 const resolvers = require('./resolvers');
 const db = require('./config/connection');
@@ -48,8 +48,13 @@ const startApolloServer = async () => {
     res.json('Hello world');
   });
 
+  // Set YOUR_DOMAIN based on environment
+  const YOUR_DOMAIN =
+    process.env.NODE_ENV === 'production'
+      ? process.env.REACT_APP_PRODUCTION_URL // Use the domain from .env for production
+      : 'http://localhost:3000'; // For development
+
   // Stripe checkout session route
-  const YOUR_DOMAIN = 'http://localhost:3000';
   app.post('/create-checkout-session', async (req, res) => {
     const session = await stripe.checkout.sessions.create({
       line_items: [

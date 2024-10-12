@@ -1,42 +1,17 @@
 import React from 'react';
-//import { CardElement, useStripe, useElements } from '@stripe/react-stripe-js';
 import { Button, Box } from '@mui/material';
 
-const PaymentForm = ({ onPaymentSucces, coffeePrice }) => {
-   // const stripe = useStripe();
-   // const elements = useElements();
-
-    // //const handleSubmit = async (event) => {
-    //    // event.preventDefault();
-
-    //     //if (!stripe || !elements) {
-    //         //return;
-    //     }
-
-    //     //const cardElement = elements.getElement(CardElement);
-
-    //     const { error, paymentMethod } = await stripe.createPaymentMethod({
-    //         type: 'card',
-    //         card: cardElement,
-    //     });
-
-    //     if (error) {
-    //         console.error(error);
-    //         alert(error.message);
-    //     } else {
-    //         console.log('Payment Method:', paymentMethod);
-    //         onPaymentSucces(paymentMethod);
-    //     }
-    // };
+const PaymentForm = ({ onPaymentSuccess, coffeePrice }) => {
+    const apiUrl = process.env.REACT_APP_API_URL; // Get the URL from the .env file
 
     return (
-        <form action="http://localhost:3001/create-checkout-session" method="POST">
+        <form action={`${apiUrl}/create-checkout-session`} method="POST">
             <Box mt={2}>
                 <Button 
                     type="submit" 
                     variant="contained" 
                     color="primary" 
-                    //disabled={!stripe || coffeePrice <= 0}
+                    // disabled={!stripe || coffeePrice <= 0}
                 >
                     Checkout
                 </Button>
