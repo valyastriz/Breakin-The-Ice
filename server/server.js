@@ -19,13 +19,22 @@ const { authMiddleware } = require('./utils/auth');
 const PORT = process.env.PORT || 3001;
 const app = express();
 
+// Get the production URL from the environment variable
+const productionUrl = process.env.REACT_APP_PRODUCTION_URL;
+
 // Enable CORS for all routes
-app.use(cors());
+app.use(cors({
+  origin: ['http://localhost:3001', productionUrl], // Allow these origins
+  credentials: true 
+}));
 
 // Apollo Server setup with GraphQL schema
 const server = new ApolloServer({
   typeDefs,
   resolvers,
+  persistedQueries: {
+    cache: "bounded", // This sets the cache to be bounded
+  },
   context: ({ req }) => authMiddleware({ req }),
   formatError: (error) => {
     console.log(error);
