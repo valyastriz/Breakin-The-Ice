@@ -52,7 +52,7 @@ const startApolloServer = async () => {
   const YOUR_DOMAIN =
     process.env.NODE_ENV === 'production'
       ? process.env.REACT_APP_PRODUCTION_URL // Use the domain from .env for production
-      : 'http://localhost:3000'; // For development
+      : 'http://localhost:3001'; // For development
 
   // Stripe checkout session route
   app.post('/create-checkout-session', async (req, res) => {
