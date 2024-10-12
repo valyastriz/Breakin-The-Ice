@@ -1,5 +1,5 @@
-const express = require('express');
 require('dotenv').config();
+const express = require('express');
 const { ApolloServer } = require('apollo-server-express');
 const path = require('path');
 const stripe = require('stripe')(process.env.STRIPE_SECRET_KEY);
@@ -10,6 +10,8 @@ const { authMiddleware } = require('./utils/auth');
 
 const PORT = process.env.PORT || 3001;
 const app = express();
+
+console.log('Stripe Key:', process.env.STRIPE_SECRET_KEY); // Add this to check if the key is loaded
 
 // Apollo Server setup with GraphQL schema
 const server = new ApolloServer({
