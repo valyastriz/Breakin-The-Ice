@@ -1,7 +1,12 @@
-// Load the environment variables from the specific file (production or development)
-require('dotenv').config({ path: './server/.env.production' }); // This should point to your .env file
+console.log('NODE_ENV before loading:', process.env.NODE_ENV);
+const envPath = process.env.NODE_ENV === 'production' ? './server/.env.production' : './server/.env';
+require('dotenv').config({ path: envPath });
+
+console.log('Current Environment:', process.env.NODE_ENV);
+console.log('Stripe Key:', process.env.STRIPE_SECRET_KEY);
 
 const express = require('express');
+const cors = require('cors'); // Import the cors package
 const { ApolloServer } = require('apollo-server-express');
 const path = require('path');
 console.log('Initializing Stripe with key:', process.env.STRIPE_SECRET_KEY);
@@ -13,6 +18,9 @@ const { authMiddleware } = require('./utils/auth');
 
 const PORT = process.env.PORT || 3001;
 const app = express();
+
+// Enable CORS for all routes
+app.use(cors());
 
 // Apollo Server setup with GraphQL schema
 const server = new ApolloServer({
