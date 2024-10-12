@@ -134,4 +134,4 @@ dist
 
 # Ignore standard .env file but not .env.production
 .env
-!client/.env.production
+.env.production

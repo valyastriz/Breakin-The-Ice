@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "main": "index.js",
   "scripts": {
-    "start": "npm run build --prefix client && NODE_ENV=production node server/server.js",
+    "start": "node server/server.js",
     "install": "cd server && npm install && cd ../client && npm install",
     "build": "npm run build --prefix client",
     "heroku-postbuild": "npm run build --prefix client",
