@@ -15,6 +15,8 @@ const httpLink = createHttpLink({
   uri: process.env.REACT_APP_GRAPHQL_URI || 'http://localhost:3001/graphql', // Default to localhost for development
 });
 
+console.log("GraphQL URI:", process.env.REACT_APP_GRAPHQL_URI);
+
 // Middleware to include the token in the headers
 const authLink = setContext((_, { headers }) => {
   // Get the authentication token from localStorage or AuthService

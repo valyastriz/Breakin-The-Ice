@@ -24,7 +24,8 @@ const productionUrl = process.env.REACT_APP_PRODUCTION_URL;
 
 // Enable CORS for all routes
 app.use(cors({
-  origin: ['http://localhost:3001', productionUrl], // Allow these origins
+  // origin: ['http://localhost:3001', productionUrl], // Allow these origins
+  // origin: '*', // Temporarily allow all origins for debugging
   credentials: true 
 }));
 
