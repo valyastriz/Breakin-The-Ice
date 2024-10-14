@@ -12,7 +12,7 @@ import AuthService from './utils/auth';  // Import your AuthService
 
 // Create HTTP link to your GraphQL server
 const httpLink = createHttpLink({
-  uri: 'http://localhost:3001/graphql',
+  uri: process.env.REACT_APP_GRAPHQL_URI || 'http://localhost:3001/graphql', // Default to localhost for development
 });
 
 // Middleware to include the token in the headers
@@ -53,15 +53,15 @@ root.render(
 reportWebVitals();
 
 // Register the service worker
-if ('serviceWorker' in navigator) {
-  window.addEventListener('load', () => {
-    navigator.serviceWorker
-      .register(`${process.env.PUBLIC_URL}/service-worker.js`)
-      .then((registration) => {
-        console.log('ServiceWorker registration successful with scope: ', registration.scope);
-      })
-      .catch((error) => {
-        console.log('ServiceWorker registration failed: ', error);
-      });
-  });
-}
+// if ('serviceWorker' in navigator) {
+//   window.addEventListener('load', () => {
+//     navigator.serviceWorker
+//       .register(`${process.env.PUBLIC_URL}/service-worker.js`)
+//       .then((registration) => {
+//         console.log('ServiceWorker registration successful with scope: ', registration.scope);
+//       })
+//       .catch((error) => {
+//         console.log('ServiceWorker registration failed: ', error);
+//       });
+//   });
+// }
