@@ -69,9 +69,17 @@ const Navbar = ({ isVertical = false }) => {
       {isLoggedIn && (
         <Button 
           onClick={handleLogout} 
+          textColor="secondary"
           sx={{
-            marginLeft: '16px', // Space between tabs and logout button
-            color: theme.palette.text.primary,
+            color: theme.text.secondary,
+            textAlign: 'center', // Center text
+            width: isVertical ? '100%' : 'auto', // Full width in vertical mode
+            minWidth: '100px', // Ensure the tabs are wide enough
+            padding: isVertical ? '12px' : '0 16px', // Adjust padding for vertical tabs
+            justifyContent: 'center', // Center content horizontally
+            '&.Mui-selected': {
+              color: theme.palette.primary.main, // Optional: highlight the selected tab with a different color
+            }
           }}
         >
           Logout
