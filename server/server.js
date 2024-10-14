@@ -47,7 +47,7 @@ const startApolloServer = async () => {
     res.json('Hello world')
   })
 
-  const YOUR_DOMAIN = 'https://icebreakerstation.onrender.com/'; 
+  const YOUR_DOMAIN = 'https://icebreakerstation.onrender.com'; 
   app.post('/create-checkout-session', async (req, res) => {
     const session = await stripe.checkout.sessions.create({
       line_items: [
