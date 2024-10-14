@@ -11,12 +11,12 @@ export default defineConfig({
         open: true,
         proxy: {
             '/graphql': {
-                target: isProduction ? 'https://icebreakerstation.onrender.com/graphql' : 'http://localhost:3001',
+                target: isProduction ? 'https://ibs.my-dev-server.com/graphql' : 'http://localhost:3001',
                 changeOrigin: true,
                 secure: false,
             },
             '/create-checkout-session': {
-                target: isProduction ? 'https://icebreakerstation.onrender.com/create-checkout-session' : 'http://localhost:3001',
+                target: isProduction ? 'https://icebreaker-station.web.app/create-checkout-session' : 'http://localhost:3001',
                 changeOrigin: true,
                 secure: false,
             }

@@ -18,6 +18,7 @@ import { BingoProvider } from './Context/BingoContext';
 import Bingo from './pages/Bingo';
 import Success from './pages/Success';
 import { CollapseProvider } from './Context/CollapseContext';  // Add CollapseProvider
+import { initializeApp } from "firebase/app";
 
 function App() {
   const [themeMode, setThemeMode] = useState('dark');
@@ -28,6 +29,19 @@ function App() {
 
   const currentTheme = createAppTheme(themeMode);
 
+  // Your web app's Firebase configuration
+  const firebaseConfig = {
+    apiKey: process.env.REACT_APP_apiKey,
+    authDomain: process.env.REACT_APP_authDomain,
+    projectId: process.env.REACT_APP_projectId,
+    storageBucket: process.env.REACT_APP_storageBucket,
+    messagingSenderId: process.env.REACT_APP_messagingSenderId,
+    appId: process.env.REACT_APP_appId
+  };
+
+  // Initialize Firebase
+  const app = initializeApp(firebaseConfig);
+  
   return (
     <PageProvider>
       <BingoProvider>
