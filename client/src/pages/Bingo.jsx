@@ -47,7 +47,7 @@ const Bingo = () => {
         alignItems: 'center',
         justifyContent: 'center',
         minHeight: '100vh', // Ensure the full height is used
-        padding: '20px 10px',  // Add padding to prevent overlap with the header
+        padding: '20px 30px',  // Add padding to prevent overlap with the header
         boxSizing: 'border-box',
         gap: '10px', // Reduce gap between elements
         backgroundColor: theme.background.default
@@ -72,9 +72,11 @@ const Bingo = () => {
           display: 'grid',
           gridTemplateColumns: 'repeat(5, 1fr)', // 5 equally sized columns
           gap: '10px', // Set equal gap between rows and columns
-          width: '80vw',  // Adjust to take up more of the screen width
-          maxWidth: '800px',  // Max width of the board for larger screens
+          width: '100%',
+          maxWidth: '800px',
           height: 'auto',
+          padding: '20px'
+
         }}
       >
         {bingoBoard.map((prompt, index) => (
@@ -84,11 +86,25 @@ const Bingo = () => {
             isSelected={selectedCards.includes(index)}
             onClick={() => toggleCard(index)}
             sx={{
-              aspectRatio: '1 / 1', // Ensure the cards are always square
-              minWidth: '80px',
-              minHeight: '80px',
-              width: '100%', 
-              margin: 'auto',
+              aspectRatio: '1 / 1', // Keep cards square
+              minWidth: '70px', // Minimum width to fit content
+              minHeight: '70px', // Minimum height to fit content
+              width: '100%', // Full width of the grid cell
+              height: 'auto', // Allow height to adjust automatically
+              padding: '8px', // Add some padding for better spacing
+              // Responsive adjustments
+              '@media (max-width: 1200px)': {
+                minWidth: '80px', // Slightly larger cards for large screens
+              },
+              '@media (max-width: 992px)': {
+                minWidth: '70px', // Medium size for medium screens
+              },
+              '@media (max-width: 768px)': {
+                minWidth: '60px', // Smaller size for small screens
+              },
+              '@media (max-width: 480px)': {
+                minWidth: '50px', // Extra-small size
+              },
             }}
           />
         ))}
