@@ -1,10 +1,14 @@
 import { Tabs, Tab, Box } from '@mui/material';
 import { Link as RouterLink, useLocation } from 'react-router-dom'; // Import useLocation
 import { useTheme } from '@mui/material/styles';
+import AuthService from '../utils/auth';  // Import your AuthService to check login status
 
 const Navbar = ({ isVertical = false }) => {
   const theme = useTheme();
   const location = useLocation(); // Get current location
+
+  // Check if the user is logged in
+  const isLoggedIn = AuthService.loggedIn();  // Call the method to check login status
 
   // Define the tab routes
   const tabs = [
@@ -12,7 +16,7 @@ const Navbar = ({ isVertical = false }) => {
     { label: 'About', path: '/about' },
     { label: 'Contact', path: '/contact' },
     { label: 'Buy Us A Coffee', path: '/buyusacoffee' },
-    { label: 'Login', path: '/login' },
+    { label: isLoggedIn ? 'Favorites' : 'Login', path: isLoggedIn ? '/favorites' : '/login' }, // Conditional tab
   ];
 
   return (
