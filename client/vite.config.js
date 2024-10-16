@@ -11,7 +11,7 @@ export default defineConfig({
         open: true,
         proxy: {
             '/graphql': {
-                target: isProduction ? 'https://ibs.my-dev-server.com/graphql' : 'http://localhost:3001',
+                target: isProduction ? 'https://ibs.my-dev-server.com/graphql/' : 'http://localhost:3001',
                 changeOrigin: true,
                 secure: false,
             },
