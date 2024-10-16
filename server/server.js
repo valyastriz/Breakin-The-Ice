@@ -61,7 +61,7 @@ const startApolloServer = async () => {
       success_url: `${YOUR_DOMAIN}/success`,
       cancel_url: `${YOUR_DOMAIN}/buyusacoffee`,
     });
-
+    console.log(session);
     res.redirect(303, session.url);
   });
   // Apply the Apollo GraphQL middleware and set the path to /graphql
