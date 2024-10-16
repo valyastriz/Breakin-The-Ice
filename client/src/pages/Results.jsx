@@ -16,6 +16,11 @@ const Results = () => {
     const userId = profile?.data?._id || null;  // Only get userId if logged in
 
     const [addFavoriteMutation] = useMutation(ADD_FAVORITE);
+    const location = useLocation();
+    const params = new URLSearchParams(location.search);
+    const titleFromUrl = params.get('title'); // Get the title from the URL parameters
+
+    const title = selection?.title || titleFromUrl;
 
     // Map titles to GraphQL queries
     const queryMap = {
@@ -27,12 +32,8 @@ const Results = () => {
         "Dumb Laws": GET_LAWS,
     };
 
-    const location = useLocation();
-    const params = new URLSearchParams(location.search);
-    const title = params.get('title'); // Get the title from the URL parameters
-
-    const { data, loading, error, refetch } = useQuery(queryMap[selection?.title], {
-        skip: !selection?.title,
+    const { data, loading, error, refetch } = useQuery(queryMap[title], {
+        skip: !title,
         variables: { limit: 10 },
     });
 
@@ -118,7 +119,7 @@ const Results = () => {
             padding: '20px'
         }}>
             <Typography variant='h3' sx={{ textAlign: 'center', width: '80%' }}>
-                {selection ? `${selection.title}` : "No selection made"}
+                {title || "No selection made"}
             </Typography>
 
  
@@ -139,7 +140,7 @@ const Results = () => {
                     return (
                         <IceBreakerCard
                             key={uniqueId} // Use unique id as key
-                            title={selection?.title}
+                            title={title}
                             description={result.content}
                             showHeart={true}
                             isFavorited={isFavorited} // Toggle heart based on whether it's favorited
