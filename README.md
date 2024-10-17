@@ -8,6 +8,7 @@ This project was created to give employers and employees a fun way to get to kno
 
 To use this website, you just need to pull up the site and you can follow the tabs to pick whatever type of icebreaker you would like to use. If you would like to favorite any of the icebreakers you find, you can create an account throuhg the login page and choose sign up. Once you are logged in, you can add favorites and also delete them. There is also an option to buy us a coffee, if you're feeling generous, by using the buy us a coffee tab on the top right hand side. There is also an option to change the colors from dark mode to light mode by clicking the toggle button on the top left hand side of the page. 
 
+
 ![main homepage dark mode](client/public/Main-homepage-dark-mode.png)
 ![main homepage light mode](client/public/Main-homepage-light-mode.png)
 ![icebreaker question](client/public/Icebreaker-question.png)
@@ -22,6 +23,7 @@ To use this website, you just need to pull up the site and you can follow the ta
 ![buy us a coffee](client/public/buy-us-a-coffee-page.png)
 ![login](client/public/login-page.png)
 ![sign up](client/public/sign-up-page.png)
+
 
 ## Credits
 
