@@ -58,7 +58,7 @@ const startApolloServer = async () => {
         },
       ],
       mode: 'payment',
-      success_url: "https://icebreakerstation.onrender.com//success",
+      success_url: "https://icebreakerstation.onrender.com//somethingCompletelyDifferent",
       cancel_url: "https://icebreakerstation.onrender.com//buyusacoffee",
     });
     console.log(session);
