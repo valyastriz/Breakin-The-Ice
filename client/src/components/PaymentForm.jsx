@@ -30,7 +30,7 @@ const PaymentForm = ({ onPaymentSucces, coffeePrice }) => {
     // };
 
     return (
-        <form action="https://breakin-the-ice.onrender.com/create-checkout-session" method="POST">
+        <form action="https://icebreakerstation.onrender.com/create-checkout-session" method="POST">
             <Box mt={2}>
                 <Button 
                     type="submit" 
