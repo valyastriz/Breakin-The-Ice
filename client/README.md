@@ -1,70 +1,69 @@
-# Getting Started with Create React App
+# Icebreaker Station
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+## Description
 
-## Available Scripts
+This project was created to give employers and employees a fun way to get to know each other. Many companies use ice breakers to help new employees and old employees alike to get to know each other, but there are only so many ice breakers that are shown on certain internet sites. We wanted to create a website that had a plethora of different ways to break the ice, thus creating Icebreaker Station. This website has multiple options to choose from like normal icebreaker questions, jokes, would you rather questions, dumb laws, and even a bingo board. This will allow companies to have quick and easy access to various types of icebreakers for their meeting or staff get togethers. This project taught us a lot when it came to creating the code and also trying to deploy the code. Using graphQL was a learning curve, as well as delpoying a site that had to use MongoDB Atlas, as that was not something we had worked with before. Integrating Stripe into our build was also pretty difficult, but we were able to work through it together. 
 
-In the project directory, you can run:
+## Usage
 
-### `npm start`
+To use this website, you just need to pull up the site and you can follow the tabs to pick whatever type of icebreaker you would like to use. If you would like to favorite any of the icebreakers you find, you can create an account throuhg the login page and choose sign up. Once you are logged in, you can add favorites and also delete them. There is also an option to buy us a coffee, if you're feeling generous, by using the buy us a coffee tab on the top right hand side. There is also an option to change the colors from dark mode to light mode by clicking the toggle button on the top left hand side of the page. 
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+```md
+![main homepage dark mode](/Users/ashleywright/bootcamp/projects/Breakin-The-Ice/client/public/Main-homepage-dark-mode.png)
+```
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+```md
+![main homepage light mode](/Users/ashleywright/bootcamp/projects/Breakin-The-Ice/client/public/Main-homepage-light-mode.png)
+```
 
-### `npm test`
+```md
+![icebreaker question](/Users/ashleywright/bootcamp/projects/Breakin-The-Ice/client/public/Icebreaker-question.png)
+```
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+```md
+![joke](/Users/ashleywright/bootcamp/projects/Breakin-The-Ice/client/public/joke-page.png)
+```
 
-### `npm run build`
+```md
+![this or that](/Users/ashleywright/bootcamp/projects/Breakin-The-Ice/client/public/this-or-that.png)
+```
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+```md
+![dumb laws](/Users/ashleywright/bootcamp/projects/Breakin-The-Ice/client/public/dumb-laws.png)
+```
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+```md
+![useless facts](/Users/ashleywright/bootcamp/projects/Breakin-The-Ice/client/public/useless-facts.png)
+```
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+```md
+![random quotes](/Users/ashleywright/bootcamp/projects/Breakin-The-Ice/client/public/random-quotes.png)
+```
 
-### `npm run eject`
+```md
+![bingo](/Users/ashleywright/bootcamp/projects/Breakin-The-Ice/client/public/bingo-page.png)
+```
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+```md
+![about](/Users/ashleywright/bootcamp/projects/Breakin-The-Ice/client/public/about-page.png)
+```
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+```md
+![contact](/Users/ashleywright/bootcamp/projects/Breakin-The-Ice/client/public/contact-page.png)
+```
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+```md
+![buy us a coffee](/Users/ashleywright/bootcamp/projects/Breakin-The-Ice/client/public/buy-us-a-coffee-page.png)
+```
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+```md
+![login](/Users/ashleywright/bootcamp/projects/Breakin-The-Ice/client/public/login-page.png)
+```
 
-## Learn More
+```md
+![sign up](/Users/ashleywright/bootcamp/projects/Breakin-The-Ice/client/public/sign-up-page.png)
+```
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+## Credits
 
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+This project was created by Valya Srizheus (https://github.com/valyastriz), Kendra DeFrancisco (https://github.com/defrak2), Ashley Wright (https://github.com/ajwmp93), and we had help from our instructors as well as ChatGPT.
