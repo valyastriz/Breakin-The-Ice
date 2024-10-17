@@ -71,12 +71,20 @@ const Bingo = () => {
         sx={{
           display: 'grid',
           gridTemplateColumns: 'repeat(5, 1fr)', // 5 equally sized columns
-          gap: '10px', // Set equal gap between rows and columns
+          gap:  {
+            xs: '5px',  // Extra small devices
+            sm: '7px',  // Small devices
+            md: '10px', // Medium devices
+            lg: '20px'
+          }, 
           width: '100%',
           maxWidth: '800px',
           height: 'auto',
-          padding: '20px'
-
+          padding: {
+            xs: '5px',  // Extra small devices
+            sm: '10px',  // Small devices
+            md: '20px', // Medium devices
+          },
         }}
       >
         {bingoBoard.map((prompt, index) => (
@@ -91,7 +99,7 @@ const Bingo = () => {
               minHeight: '70px', // Minimum height to fit content
               width: '100%', // Full width of the grid cell
               height: 'auto', // Allow height to adjust automatically
-              padding: '8px', // Add some padding for better spacing
+              // padding: '8px', // Add some padding for better spacing
               // Responsive adjustments
               '@media (max-width: 1200px)': {
                 minWidth: '80px', // Slightly larger cards for large screens
