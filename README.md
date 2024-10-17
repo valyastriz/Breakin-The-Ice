@@ -8,61 +8,22 @@ This project was created to give employers and employees a fun way to get to kno
 
 To use this website, you just need to pull up the site and you can follow the tabs to pick whatever type of icebreaker you would like to use. If you would like to favorite any of the icebreakers you find, you can create an account throuhg the login page and choose sign up. Once you are logged in, you can add favorites and also delete them. There is also an option to buy us a coffee, if you're feeling generous, by using the buy us a coffee tab on the top right hand side. There is also an option to change the colors from dark mode to light mode by clicking the toggle button on the top left hand side of the page. 
 
-```md
+
 ![main homepage dark mode](client/public/Main-homepage-dark-mode.png)
-```
-
-```md
 ![main homepage light mode](client/public/Main-homepage-light-mode.png)
-```
-
-```md
 ![icebreaker question](client/public/Icebreaker-question.png)
-```
-
-```md
 ![joke](client/public/joke-page.png)
-```
-
-```md
 ![this or that](client/public/this-or-that.png)
-```
-
-```md
 ![dumb laws](client/public/dumb-laws.png)
-```
-
-```md
 ![useless facts](client/public/useless-facts.png)
-```
-
-```md
 ![random quotes](client/public/random-quotes.png)
-```
-
-```md
 ![bingo](client/public/bingo-page.png)
-```
-
-```md
 ![about](client/public/about-page.png)
-```
-
-```md
 ![contact](client/public/contact-page.png)
-```
-
-```md
 ![buy us a coffee](client/public/buy-us-a-coffee-page.png)
-```
-
-```md
 ![login](client/public/login-page.png)
-```
-
-```md
 ![sign up](client/public/sign-up-page.png)
-```
+
 
 ## Credits
 
