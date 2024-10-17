@@ -50,6 +50,7 @@ const startApolloServer = async () => {
   const YOUR_DOMAIN = 'https://icebreakerstation.onrender.com'; 
   console.log(YOUR_DOMAIN);
   app.post('/create-checkout-session', async (req, res) => {
+    console.log('TEST ======')
     const session = await stripe.checkout.sessions.create({
       line_items: [
         {
@@ -58,8 +59,8 @@ const startApolloServer = async () => {
         },
       ],
       mode: 'payment',
-      success_url: "https://icebreakerstation.onrender.com/success",
-      cancel_url: "https://icebreakerstation.onrender.com/buyusacoffee",
+      success_url: "https://icebreakerstation.onrender.com\/success",
+      cancel_url: "https://icebreakerstation.onrender.com\/buyusacoffee",
     });
     console.log(session);
     res.redirect(303, session.url);
