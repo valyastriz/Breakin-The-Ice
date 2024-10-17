@@ -39,7 +39,12 @@ const BingoPlayingCard = ({ content, isSelected, onClick, sx }) => {
           variant="body1"
           align="center"
           sx={{
-            fontSize: 'clamp(10px, 2vw, 16px)',  // Dynamically adjust font size
+            fontSize: {
+              xs: '0.6rem',  // Smaller font size for extra-small screens
+              sm: '1rem',      // Default for small screens
+              md: '1.25rem',   // Medium size for larger screens
+              lg: '1.5rem',    // Larger for extra-large screens
+            },
             lineHeight: 1.1,
             textAlign: 'center',  // Center the text
             width: '100%',  // Ensure text takes up the full card space
